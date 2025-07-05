@@ -6,7 +6,6 @@ import com.echotrail.capsulems.model.*;
 import com.echotrail.capsulems.repository.*;
 import com.echotrail.capsulems.util.MarkdownProcessor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +18,7 @@ import java.util.stream.Collectors;
 public class CapsuleService {
 
     private final CapsuleRepository capsuleRepository;
+    private final CapsuleChainRepository capsuleChainRepository;
     private final MarkdownProcessor markdownProcessor;
 
     @Transactional
@@ -33,6 +33,14 @@ public class CapsuleService {
         capsule.setUnlockAt(request.getUnlockAt());
 
         Capsule saved = capsuleRepository.save(capsule);
+
+        if (request.isChained()) {
+            CapsuleChain capsuleChain = new CapsuleChain();
+            capsuleChain.setCapsuleId(saved.getId());
+            capsuleChain.setUserId(userId);
+            capsuleChainRepository.save(capsuleChain);
+        }
+
         return mapToResponse(saved);
     }
 
