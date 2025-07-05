@@ -3,6 +3,7 @@ package com.echotrail.capsulems.controller;
 import com.echotrail.capsulems.DTO.*;
 import com.echotrail.capsulems.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,8 @@ public class CapsuleController {
             @RequestHeader("X-UserId") Long userId,
             @RequestBody CapsuleRequest request
     ) {
-        return ResponseEntity.ok(capsuleService.createCapsule(userId, request));
+        CapsuleResponse createdCapsule = capsuleService.createCapsule(userId, request);
+        return new ResponseEntity<>(createdCapsule, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
