@@ -6,8 +6,10 @@ import com.echotrail.capsulems.exception.UnauthorizedAccessException;
 import com.echotrail.capsulems.model.CapsuleChain;
 import com.echotrail.capsulems.repository.CapsuleChainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.cassandra.core.CassandraTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,6 +19,9 @@ public class CapsuleChainService {
 
     @Autowired
     private CapsuleChainRepository capsuleChainRepository;
+
+    @Autowired
+    private CassandraTemplate cassandraTemplate;
 
     private CapsuleChain getAndAuthorize(Long capsuleId, Long userId) {
         CapsuleChain capsuleChain = capsuleChainRepository.findById(capsuleId)
@@ -69,8 +74,7 @@ public class CapsuleChainService {
         capsuleChain.setPreviousCapsuleId(previousCapsuleId);
         previousCapsuleChain.setNextCapsuleId(capsuleId);
 
-        capsuleChainRepository.save(capsuleChain);
-        capsuleChainRepository.save(previousCapsuleChain);
+        cassandraTemplate.batchOps().update(capsuleChain).update(previousCapsuleChain).execute();
     }
 
     public void setNextCapsuleId(Long capsuleId, Long nextCapsuleId, Long userId) {
@@ -87,7 +91,6 @@ public class CapsuleChainService {
         capsuleChain.setNextCapsuleId(nextCapsuleId);
         nextCapsuleChain.setPreviousCapsuleId(capsuleId);
 
-        capsuleChainRepository.save(capsuleChain);
-        capsuleChainRepository.save(nextCapsuleChain);
+        cassandraTemplate.batchOps().update(capsuleChain).update(nextCapsuleChain).execute();
     }
 }
