@@ -112,15 +112,14 @@ class CapsuleChainServiceTest {
         assertThrows(CapsuleNotFoundException.class, () -> capsuleChainService.getCapsuleChainById(1L, 1L));
     }
 
+    @Test
     void setPreviousCapsuleId_shouldThrowException_whenLinkingToItself() {
-        when(capsuleChainRepository.findById(1L)).thenThrow(new CapsuleNotFoundException("Capsule chain not found for capsule id: 1"));
-        assertThrows(CapsuleNotFoundException.class, () -> capsuleChainService.setPreviousCapsuleId(1L, 1L, 1L));
+        assertThrows(IllegalArgumentException.class, () -> capsuleChainService.setPreviousCapsuleId(1L, 1L, 1L));
     }
 
     @Test
     void setNextCapsuleId_shouldThrowException_whenLinkingToItself() {
-        when(capsuleChainRepository.findById(1L)).thenThrow(new CapsuleNotFoundException("Capsule chain not found for capsule id: 1"));
-        assertThrows(CapsuleNotFoundException.class, () -> capsuleChainService.setNextCapsuleId(1L, 1L, 1L));
+        assertThrows(IllegalArgumentException.class, () -> capsuleChainService.setNextCapsuleId(1L, 1L, 1L));
     }
 
     @Test
