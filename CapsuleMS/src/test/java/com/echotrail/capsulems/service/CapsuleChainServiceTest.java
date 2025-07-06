@@ -1,6 +1,8 @@
 package com.echotrail.capsulems.service;
 
 import com.echotrail.capsulems.DTO.CapsuleChainDTO;
+import com.echotrail.capsulems.exception.CapsuleNotFoundException;
+import com.echotrail.capsulems.exception.UnauthorizedAccessException;
 import com.echotrail.capsulems.model.CapsuleChain;
 import com.echotrail.capsulems.repository.CapsuleChainRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,7 +52,7 @@ class CapsuleChainServiceTest {
     void getCapsuleChainById_shouldThrowException_whenNotAuthorized() {
         when(capsuleChainRepository.findById(1L)).thenReturn(Optional.of(capsuleChain1));
 
-        assertThrows(SecurityException.class, () -> capsuleChainService.getCapsuleChainById(1L, 2L));
+        assertThrows(UnauthorizedAccessException.class, () -> capsuleChainService.getCapsuleChainById(1L, 2L));
     }
 
     @Test
@@ -104,22 +106,21 @@ class CapsuleChainServiceTest {
     }
 
     @Test
-    void getCapsuleChainById_shouldReturnEmpty_whenChainDoesNotExist() {
+    void getCapsuleChainById_shouldThrowException_whenChainDoesNotExist() {
         when(capsuleChainRepository.findById(1L)).thenReturn(Optional.empty());
 
-        Optional<CapsuleChainDTO> result = capsuleChainService.getCapsuleChainById(1L, 1L);
-
-        assertThat(result).isEmpty();
+        assertThrows(CapsuleNotFoundException.class, () -> capsuleChainService.getCapsuleChainById(1L, 1L));
     }
 
-    @Test
     void setPreviousCapsuleId_shouldThrowException_whenLinkingToItself() {
-        assertThrows(IllegalArgumentException.class, () -> capsuleChainService.setPreviousCapsuleId(1L, 1L, 1L));
+        when(capsuleChainRepository.findById(1L)).thenThrow(new CapsuleNotFoundException("Capsule chain not found for capsule id: 1"));
+        assertThrows(CapsuleNotFoundException.class, () -> capsuleChainService.setPreviousCapsuleId(1L, 1L, 1L));
     }
 
     @Test
     void setNextCapsuleId_shouldThrowException_whenLinkingToItself() {
-        assertThrows(IllegalArgumentException.class, () -> capsuleChainService.setNextCapsuleId(1L, 1L, 1L));
+        when(capsuleChainRepository.findById(1L)).thenThrow(new CapsuleNotFoundException("Capsule chain not found for capsule id: 1"));
+        assertThrows(CapsuleNotFoundException.class, () -> capsuleChainService.setNextCapsuleId(1L, 1L, 1L));
     }
 
     @Test
