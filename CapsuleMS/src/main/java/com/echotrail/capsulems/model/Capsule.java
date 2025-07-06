@@ -31,6 +31,11 @@ public class Capsule {
     private boolean isChained;
 
     private LocalDateTime unlockAt;
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 
 }
