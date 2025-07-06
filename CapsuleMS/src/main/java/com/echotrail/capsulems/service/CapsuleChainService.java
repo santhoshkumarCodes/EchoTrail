@@ -1,6 +1,8 @@
 package com.echotrail.capsulems.service;
 
 import com.echotrail.capsulems.DTO.CapsuleChainDTO;
+import com.echotrail.capsulems.exception.CapsuleNotFoundException;
+import com.echotrail.capsulems.exception.UnauthorizedAccessException;
 import com.echotrail.capsulems.model.CapsuleChain;
 import com.echotrail.capsulems.repository.CapsuleChainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +18,18 @@ public class CapsuleChainService {
     @Autowired
     private CapsuleChainRepository capsuleChainRepository;
 
-    private void authorizeUser(Long capsuleId, Long userId) {
-        capsuleChainRepository.findById(capsuleId)
-                .ifPresent(capsuleChain -> {
-                    if (!capsuleChain.getUserId().equals(userId)) {
-                        throw new SecurityException("User not authorized to access this capsule.");
-                    }
-                });
+    private CapsuleChain getAndAuthorize(Long capsuleId, Long userId) {
+        CapsuleChain capsuleChain = capsuleChainRepository.findById(capsuleId)
+                .orElseThrow(() -> new CapsuleNotFoundException("Capsule chain not found for capsule id: " + capsuleId));
+        if (!capsuleChain.getUserId().equals(userId)) {
+            throw new UnauthorizedAccessException("User not authorized to access this capsule.");
+        }
+        return capsuleChain;
     }
 
     public Optional<CapsuleChainDTO> getCapsuleChainById(Long capsuleId, Long userId) {
-        authorizeUser(capsuleId, userId);
-        return capsuleChainRepository.findById(capsuleId)
-                .map(this::convertToDto);
+        CapsuleChain capsuleChain = getAndAuthorize(capsuleId, userId);
+        return Optional.of(capsuleChain).map(this::convertToDto);
     }
 
     private CapsuleChainDTO convertToDto(CapsuleChain capsuleChain) {
@@ -41,28 +42,22 @@ public class CapsuleChainService {
     }
 
     public Optional<CapsuleChainDTO> getPreviousCapsule(Long capsuleId, Long userId) {
-        authorizeUser(capsuleId, userId);
+        getAndAuthorize(capsuleId, userId);
         return getCapsuleChainById(capsuleId, userId)
                 .map(CapsuleChainDTO::getPreviousCapsuleId)
                 .flatMap(id -> getCapsuleChainById(id, userId));
     }
 
     public Optional<CapsuleChainDTO> getNextCapsule(Long capsuleId, Long userId) {
-        authorizeUser(capsuleId, userId);
+        getAndAuthorize(capsuleId, userId);
         return getCapsuleChainById(capsuleId, userId)
                 .map(CapsuleChainDTO::getNextCapsuleId)
                 .flatMap(id -> getCapsuleChainById(id, userId));
     }
 
     public void setPreviousCapsuleId(Long capsuleId, Long previousCapsuleId, Long userId) {
-        authorizeUser(capsuleId, userId);
-        authorizeUser(previousCapsuleId, userId);
-
-        CapsuleChain capsuleChain = capsuleChainRepository.findById(capsuleId)
-                .orElseThrow(() -> new IllegalArgumentException("Capsule chain not found for capsule id: " + capsuleId));
-
-        CapsuleChain previousCapsuleChain = capsuleChainRepository.findById(previousCapsuleId)
-                .orElseThrow(() -> new IllegalArgumentException("Capsule chain not found for previous capsule id: " + previousCapsuleId));
+        CapsuleChain capsuleChain = getAndAuthorize(capsuleId, userId);
+        CapsuleChain previousCapsuleChain = getAndAuthorize(previousCapsuleId, userId);
 
         if (previousCapsuleChain.getNextCapsuleId() != null) {
             throw new IllegalStateException("Previous capsule already has a next capsule.");
@@ -76,14 +71,8 @@ public class CapsuleChainService {
     }
 
     public void setNextCapsuleId(Long capsuleId, Long nextCapsuleId, Long userId) {
-        authorizeUser(capsuleId, userId);
-        authorizeUser(nextCapsuleId, userId);
-
-        CapsuleChain capsuleChain = capsuleChainRepository.findById(capsuleId)
-                .orElseThrow(() -> new IllegalArgumentException("Capsule chain not found for capsule id: " + capsuleId));
-
-        CapsuleChain nextCapsuleChain = capsuleChainRepository.findById(nextCapsuleId)
-                .orElseThrow(() -> new IllegalArgumentException("Capsule chain not found for next capsule id: " + nextCapsuleId));
+        CapsuleChain capsuleChain = getAndAuthorize(capsuleId, userId);
+        CapsuleChain nextCapsuleChain = getAndAuthorize(nextCapsuleId, userId);
 
         if (nextCapsuleChain.getPreviousCapsuleId() != null) {
             throw new IllegalStateException("Next capsule already has a previous capsule.");
