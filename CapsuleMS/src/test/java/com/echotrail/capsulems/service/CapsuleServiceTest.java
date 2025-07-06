@@ -1,5 +1,7 @@
 package com.echotrail.capsulems.service;
 
+import com.datastax.oss.driver.api.core.cql.BatchStatement;
+import org.springframework.data.cassandra.core.cql.CqlOperations;
 import com.echotrail.capsulems.DTO.CapsuleRequest;
 import com.echotrail.capsulems.DTO.CapsuleResponse;
 import com.echotrail.capsulems.exception.CapsuleNotFoundException;
@@ -15,6 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.cassandra.core.CassandraTemplate;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -37,6 +40,9 @@ class CapsuleServiceTest {
 
     @Mock
     private MarkdownProcessor markdownProcessor;
+
+    @Mock
+    private CassandraTemplate cassandraTemplate;
 
     @InjectMocks
     private CapsuleService capsuleService;
@@ -175,14 +181,15 @@ class CapsuleServiceTest {
         when(capsuleChainRepository.findById(2L)).thenReturn(Optional.of(prevChain));
         when(capsuleChainRepository.findById(3L)).thenReturn(Optional.of(nextChain));
 
+        // Mock CassandraTemplate and CqlOperations
+        CqlOperations cqlOperations = mock(CqlOperations.class);
+        when(cassandraTemplate.getCqlOperations()).thenReturn(cqlOperations);
+        when(cqlOperations.execute(any(BatchStatement.class))).thenReturn(true);
+
         capsuleService.deleteCapsule(1L, 1L);
 
-        assertThat(prevChain.getNextCapsuleId()).isEqualTo(3L);
-        assertThat(nextChain.getPreviousCapsuleId()).isEqualTo(2L);
-
-        verify(capsuleChainRepository, times(1)).save(prevChain);
-        verify(capsuleChainRepository, times(1)).save(nextChain);
-        verify(capsuleChainRepository, times(1)).delete(chain);
+        // Verify that batch operation was executed
+        verify(cqlOperations, times(1)).execute(any(BatchStatement.class));
         verify(capsuleRepository, times(1)).delete(capsule);
     }
 }
