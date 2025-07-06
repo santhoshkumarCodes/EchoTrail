@@ -56,6 +56,9 @@ public class CapsuleChainService {
     }
 
     public void setPreviousCapsuleId(Long capsuleId, Long previousCapsuleId, Long userId) {
+        if (java.util.Objects.equals(capsuleId, previousCapsuleId)) {
+            throw new IllegalArgumentException("A capsule cannot be linked to itself.");
+        }
         CapsuleChain capsuleChain = getAndAuthorize(capsuleId, userId);
         CapsuleChain previousCapsuleChain = getAndAuthorize(previousCapsuleId, userId);
 
@@ -71,6 +74,9 @@ public class CapsuleChainService {
     }
 
     public void setNextCapsuleId(Long capsuleId, Long nextCapsuleId, Long userId) {
+        if (java.util.Objects.equals(capsuleId, nextCapsuleId)) {
+            throw new IllegalArgumentException("A capsule cannot be linked to itself.");
+        }
         CapsuleChain capsuleChain = getAndAuthorize(capsuleId, userId);
         CapsuleChain nextCapsuleChain = getAndAuthorize(nextCapsuleId, userId);
 
