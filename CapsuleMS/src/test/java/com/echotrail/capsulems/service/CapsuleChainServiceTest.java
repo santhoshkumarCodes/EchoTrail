@@ -11,6 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.cassandra.core.CassandraBatchOperations;
+import org.springframework.data.cassandra.core.CassandraTemplate;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +28,12 @@ class CapsuleChainServiceTest {
     @Mock
     private CapsuleChainRepository capsuleChainRepository;
 
+    @Mock
+    private CassandraTemplate cassandraTemplate;
+
+    @Mock
+    private CassandraBatchOperations batchOps;
+
     @InjectMocks
     private CapsuleChainService capsuleChainService;
 
@@ -36,6 +44,8 @@ class CapsuleChainServiceTest {
     void setUp() {
         capsuleChain1 = new CapsuleChain(1L, null, 2L, 1L);
         capsuleChain2 = new CapsuleChain(2L, 1L, null, 1L);
+        lenient().when(cassandraTemplate.batchOps()).thenReturn(batchOps);
+        lenient().when(batchOps.update(any(CapsuleChain.class))).thenReturn(batchOps);
     }
 
     @Test
@@ -88,7 +98,7 @@ class CapsuleChainServiceTest {
 
         assertThat(capsuleChain4.getPreviousCapsuleId()).isEqualTo(3L);
         assertThat(capsuleChain3.getNextCapsuleId()).isEqualTo(4L);
-        verify(capsuleChainRepository, times(2)).save(any(CapsuleChain.class));
+        verify(batchOps, times(1)).execute();
     }
 
     @Test
@@ -102,7 +112,7 @@ class CapsuleChainServiceTest {
 
         assertThat(capsuleChain3.getNextCapsuleId()).isEqualTo(4L);
         assertThat(capsuleChain4.getPreviousCapsuleId()).isEqualTo(3L);
-        verify(capsuleChainRepository, times(2)).save(any(CapsuleChain.class));
+        verify(batchOps, times(1)).execute();
     }
 
     @Test
