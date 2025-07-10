@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Builder
 public class CapsuleResponse {
     private Long id;
+    private Long userId;
     private String title;
     private String contentHtml;
     private boolean isPublic;

@@ -1,23 +1,21 @@
 package com.echotrail.capsulems.service;
 
-import com.datastax.oss.driver.api.core.cql.BatchStatement;
-import org.springframework.data.cassandra.core.cql.CqlOperations;
 import com.echotrail.capsulems.DTO.CapsuleRequest;
 import com.echotrail.capsulems.DTO.CapsuleResponse;
 import com.echotrail.capsulems.exception.CapsuleNotFoundException;
 import com.echotrail.capsulems.exception.UnauthorizedAccessException;
 import com.echotrail.capsulems.model.Capsule;
 import com.echotrail.capsulems.model.CapsuleChain;
-import com.echotrail.capsulems.repository.CapsuleChainRepository;
+import com.echotrail.capsulems.outbox.OutboxEventPublisher;
 import com.echotrail.capsulems.repository.CapsuleRepository;
 import com.echotrail.capsulems.util.MarkdownProcessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.cassandra.core.CassandraTemplate;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -36,13 +34,13 @@ class CapsuleServiceTest {
     private CapsuleRepository capsuleRepository;
 
     @Mock
-    private CapsuleChainRepository capsuleChainRepository;
+    private OutboxEventPublisher outboxEventPublisher;
 
     @Mock
     private MarkdownProcessor markdownProcessor;
 
     @Mock
-    private CassandraTemplate cassandraTemplate;
+    private ObjectMapper objectMapper;
 
     @InjectMocks
     private CapsuleService capsuleService;
@@ -65,28 +63,36 @@ class CapsuleServiceTest {
     @Test
     void createCapsule_shouldCreateAndSaveCapsule() {
         when(markdownProcessor.toHtml(anyString())).thenReturn("Test Content HTML");
-        when(capsuleRepository.save(any(Capsule.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(capsuleRepository.save(any(Capsule.class))).thenAnswer(invocation -> {
+            Capsule capsuleToSave = invocation.getArgument(0);
+            capsuleToSave.setId(1L);
+            return capsuleToSave;
+        });
 
         CapsuleResponse response = capsuleService.createCapsule(1L, capsuleRequest);
 
         assertThat(response).isNotNull();
         assertThat(response.getTitle()).isEqualTo("Test Title");
         verify(capsuleRepository, times(1)).save(any(Capsule.class));
-        verify(capsuleChainRepository, never()).save(any(CapsuleChain.class));
+        verify(outboxEventPublisher, times(1)).publish(any(), any(), any(), any());
     }
 
     @Test
     void createCapsule_shouldCreateAndSaveChainedCapsule() {
         capsuleRequest.setChained(true);
         when(markdownProcessor.toHtml(anyString())).thenReturn("Test Content HTML");
-        when(capsuleRepository.save(any(Capsule.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(capsuleRepository.save(any(Capsule.class))).thenAnswer(invocation -> {
+            Capsule capsuleToSave = invocation.getArgument(0);
+            capsuleToSave.setId(1L);
+            return capsuleToSave;
+        });
 
         CapsuleResponse response = capsuleService.createCapsule(1L, capsuleRequest);
 
         assertThat(response).isNotNull();
         assertThat(response.isChained()).isTrue();
         verify(capsuleRepository, times(1)).save(any(Capsule.class));
-        verify(capsuleChainRepository, times(1)).save(any(CapsuleChain.class));
+        verify(outboxEventPublisher, times(1)).publish(any(), any(), any(), any());
     }
 
     @Test
@@ -150,6 +156,7 @@ class CapsuleServiceTest {
         capsuleService.deleteCapsule(1L, 1L);
 
         verify(capsuleRepository, times(1)).delete(capsule);
+        verify(outboxEventPublisher, times(1)).publish(any(), any(), any(), any());
     }
 
     @Test
@@ -168,28 +175,13 @@ class CapsuleServiceTest {
 
     @Test
     void deleteCapsule_shouldUnlinkChainedCapsules() {
-        Capsule prev = new Capsule(2L, 1L, "Prev", "", "", true, true, false, null, null);
-        Capsule next = new Capsule(3L, 1L, "Next", "", "", true, true, false, null, null);
         capsule.setChained(true);
 
-        CapsuleChain chain = new CapsuleChain(1L, 2L, 3L, 1L);
-        CapsuleChain prevChain = new CapsuleChain(2L, null, 1L, 1L);
-        CapsuleChain nextChain = new CapsuleChain(3L, 1L, null, 1L);
-
         when(capsuleRepository.findById(1L)).thenReturn(Optional.of(capsule));
-        when(capsuleChainRepository.findById(1L)).thenReturn(Optional.of(chain));
-        when(capsuleChainRepository.findById(2L)).thenReturn(Optional.of(prevChain));
-        when(capsuleChainRepository.findById(3L)).thenReturn(Optional.of(nextChain));
-
-        // Mock CassandraTemplate and CqlOperations
-        CqlOperations cqlOperations = mock(CqlOperations.class);
-        when(cassandraTemplate.getCqlOperations()).thenReturn(cqlOperations);
-        when(cqlOperations.execute(any(BatchStatement.class))).thenReturn(true);
 
         capsuleService.deleteCapsule(1L, 1L);
 
-        // Verify that batch operation was executed
-        verify(cqlOperations, times(1)).execute(any(BatchStatement.class));
         verify(capsuleRepository, times(1)).delete(capsule);
+        verify(outboxEventPublisher, times(1)).publish(any(), any(), any(), any());
     }
 }
