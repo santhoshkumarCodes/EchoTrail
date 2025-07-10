@@ -47,16 +47,14 @@ public class CapsuleChainService {
     }
 
     public Optional<CapsuleChainDTO> getPreviousCapsule(Long capsuleId, Long userId) {
-        getAndAuthorize(capsuleId, userId);
-        return getCapsuleChainById(capsuleId, userId)
-                .map(CapsuleChainDTO::getPreviousCapsuleId)
+        CapsuleChain currentChain = getAndAuthorize(capsuleId, userId);
+        return Optional.ofNullable(currentChain.getPreviousCapsuleId())
                 .flatMap(id -> getCapsuleChainById(id, userId));
     }
 
     public Optional<CapsuleChainDTO> getNextCapsule(Long capsuleId, Long userId) {
-        getAndAuthorize(capsuleId, userId);
-        return getCapsuleChainById(capsuleId, userId)
-                .map(CapsuleChainDTO::getNextCapsuleId)
+        CapsuleChain currentChain = getAndAuthorize(capsuleId, userId);
+        return Optional.ofNullable(currentChain.getNextCapsuleId())
                 .flatMap(id -> getCapsuleChainById(id, userId));
     }
 
