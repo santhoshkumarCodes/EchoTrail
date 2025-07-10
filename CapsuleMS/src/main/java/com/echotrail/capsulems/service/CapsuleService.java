@@ -1,23 +1,20 @@
 package com.echotrail.capsulems.service;
 
-import com.datastax.oss.driver.api.core.cql.BatchStatement;
-import com.datastax.oss.driver.api.core.cql.BatchStatementBuilder;
-import com.datastax.oss.driver.api.core.cql.BatchType;
-import com.datastax.oss.driver.api.core.cql.SimpleStatement;
-import com.echotrail.capsulems.DTO.*;
-import com.echotrail.capsulems.exception.*;
-import com.echotrail.capsulems.model.*;
-import com.echotrail.capsulems.repository.*;
+import com.echotrail.capsulems.DTO.CapsuleDeletePayload;
+import com.echotrail.capsulems.DTO.CapsuleRequest;
+import com.echotrail.capsulems.DTO.CapsuleResponse;
+import com.echotrail.capsulems.exception.CapsuleNotFoundException;
+import com.echotrail.capsulems.exception.UnauthorizedAccessException;
+import com.echotrail.capsulems.model.Capsule;
+import com.echotrail.capsulems.outbox.OutboxEventPublisher;
+import com.echotrail.capsulems.repository.CapsuleRepository;
 import com.echotrail.capsulems.util.MarkdownProcessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.cassandra.core.CassandraTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,12 +22,12 @@ import java.util.stream.Collectors;
 public class CapsuleService {
 
     private final CapsuleRepository capsuleRepository;
-    private final CapsuleChainRepository capsuleChainRepository;
+    private final OutboxEventPublisher outboxEventPublisher;
     private final MarkdownProcessor markdownProcessor;
-    private final CassandraTemplate cassandraTemplate;
+    private final ObjectMapper objectMapper;
 
+    @Transactional
     public CapsuleResponse createCapsule(Long userId, CapsuleRequest request) {
-        // 1. Save to PostgreSQL
         Capsule capsule = new Capsule();
         capsule.setUserId(userId);
         capsule.setTitle(request.getTitle());
@@ -41,19 +38,12 @@ public class CapsuleService {
         capsule.setUnlockAt(request.getUnlockAt());
         Capsule savedCapsule = capsuleRepository.save(capsule);
 
-        // 2. Save to Cassandra
-        if (request.isChained()) {
-            try {
-                CapsuleChain capsuleChain = new CapsuleChain();
-                capsuleChain.setCapsuleId(savedCapsule.getId());
-                capsuleChain.setUserId(userId);
-                capsuleChainRepository.save(capsuleChain);
-            } catch (Exception e) {
-                // Compensating action: Delete from PostgreSQL if Cassandra save fails
-                capsuleRepository.deleteById(savedCapsule.getId());
-                throw new CapsuleCreationException("Failed to create capsule chain", e);
-            }
-        }
+        outboxEventPublisher.publish(
+                "Capsule",
+                savedCapsule.getId().toString(),
+                "CapsuleCreated",
+                mapToResponse(savedCapsule)
+        );
 
         return mapToResponse(savedCapsule);
     }
@@ -72,6 +62,7 @@ public class CapsuleService {
     private CapsuleResponse mapToResponse(Capsule capsule) {
         return CapsuleResponse.builder()
                 .id(capsule.getId())
+                .userId(capsule.getUserId())
                 .title(capsule.getTitle())
                 .contentHtml(capsule.getContentHtml())
                 .isPublic(capsule.isPublic())
@@ -89,8 +80,8 @@ public class CapsuleService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void deleteCapsule(Long userId, Long id) {
-        // 1. Find the capsule and verify ownership
         Capsule capsule = capsuleRepository.findById(id)
                 .orElseThrow(() -> new CapsuleNotFoundException("Capsule not found with id: " + id));
 
@@ -98,45 +89,13 @@ public class CapsuleService {
             throw new UnauthorizedAccessException("User not authorized to delete this capsule.");
         }
 
-        // 2. Delete from PostgreSQL
         capsuleRepository.delete(capsule);
 
-        // 3. Delete from Cassandra with compensating action
-        if (capsule.isChained()) {
-            try {
-                Optional<CapsuleChain> capsuleChainOpt = capsuleChainRepository.findById(id);
-                if (capsuleChainOpt.isEmpty()) {
-                    return; // Or throw an exception if this state is unexpected
-                }
-                CapsuleChain capsuleChain = capsuleChainOpt.get();
-                Long prevId = capsuleChain.getPreviousCapsuleId();
-                Long nextId = capsuleChain.getNextCapsuleId();
-
-                Optional<CapsuleChain> prevChainOpt = Optional.ofNullable(prevId).flatMap(capsuleChainRepository::findById);
-                Optional<CapsuleChain> nextChainOpt = Optional.ofNullable(nextId).flatMap(capsuleChainRepository::findById);
-
-                BatchStatementBuilder batch = BatchStatement.builder(BatchType.LOGGED);
-
-                prevChainOpt.ifPresent(prev -> {
-                    String updateQuery = "UPDATE capsule_chain SET next_capsule_id = ? WHERE capsule_id = ?";
-                    batch.addStatement(SimpleStatement.newInstance(updateQuery, nextId, prev.getCapsuleId()));
-                });
-
-                nextChainOpt.ifPresent(next -> {
-                    String updateQuery = "UPDATE capsule_chain SET previous_capsule_id = ? WHERE capsule_id = ?";
-                    batch.addStatement(SimpleStatement.newInstance(updateQuery, prevId, next.getCapsuleId()));
-                });
-
-                String deleteQuery = "DELETE FROM capsule_chain WHERE capsule_id = ?";
-                batch.addStatement(SimpleStatement.newInstance(deleteQuery, id));
-
-                cassandraTemplate.getCqlOperations().execute(batch.build());
-
-            } catch (Exception e) {
-                // Compensating action: Re-save the capsule to PostgreSQL
-                capsuleRepository.save(capsule);
-                throw new CapsuleDeletionException("Failed to delete capsule chain", e);
-            }
-        }
+        outboxEventPublisher.publish(
+                "Capsule",
+                id.toString(),
+                "CapsuleDeleted",
+                new CapsuleDeletePayload(id, capsule.isChained())
+        );
     }
 }
