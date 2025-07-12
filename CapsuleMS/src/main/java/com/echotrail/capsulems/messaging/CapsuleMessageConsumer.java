@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import org.springframework.kafka.annotation.DltHandler;
+import org.springframework.kafka.annotation.RetryableTopic;
+import org.springframework.kafka.retrytopic.TopicSuffixingStrategy;
+import org.springframework.retry.annotation.Backoff;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -22,6 +27,10 @@ public class CapsuleMessageConsumer {
     private final CapsuleChainRepository capsuleChainRepository;
     private final CassandraTemplate cassandraTemplate;
 
+    @RetryableTopic(
+            attempts = "3",
+            backoff = @Backoff(delay = 1000, multiplier = 2.0),
+            topicSuffixingStrategy = TopicSuffixingStrategy.SUFFIX_WITH_INDEX_VALUE)
     @KafkaListener(topics = "capsule.public.outbox", groupId = "capsule-ms")
     public void consume(String message) {
         log.info("Received message: {}", message);
@@ -102,6 +111,12 @@ public class CapsuleMessageConsumer {
 
         } catch (Exception e) {
             log.error("Error processing message: {}", message, e);
+            throw new RuntimeException(e);
         }
+    }
+
+    @DltHandler
+    public void dlt(String message) {
+        log.error("Message moved to DLT: {}", message);
     }
 }
