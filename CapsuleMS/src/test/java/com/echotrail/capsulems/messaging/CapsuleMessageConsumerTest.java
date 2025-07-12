@@ -6,14 +6,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.cassandra.core.CassandraBatchOperations;
+import org.springframework.data.cassandra.core.CassandraTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
@@ -39,12 +42,14 @@ class CapsuleMessageConsumerTest {
         public KafkaTemplate<String, String> kafkaTemplate() {
             return mock(KafkaTemplate.class);
         }
+
+        @Bean
+        public CassandraTemplate cassandraTemplate() {
+            return mock(CassandraTemplate.class);
+        }
     }
 
-    @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
-
-    @MockBean
+    @MockitoBean
     private CapsuleChainRepository capsuleChainRepository;
 
     @Autowired
@@ -52,6 +57,12 @@ class CapsuleMessageConsumerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private CassandraTemplate cassandraTemplate;
+
+    @Mock
+    private CassandraBatchOperations batchOperations;
 
     @Test
     void consume_CapsuleCreated_Chained() throws Exception {
@@ -98,11 +109,12 @@ class CapsuleMessageConsumerTest {
 
         CapsuleChain chain = new CapsuleChain(1L, null, null, 1L);
         when(capsuleChainRepository.findById(1L)).thenReturn(Optional.of(chain));
+        when(cassandraTemplate.batchOps()).thenReturn(batchOperations);
 
         // When
         capsuleMessageConsumer.consume(message);
 
         // Then
-        verify(capsuleChainRepository, timeout(5000).times(1)).delete(any(CapsuleChain.class));
+        verify(batchOperations, timeout(5000).times(1)).execute();
     }
 }
