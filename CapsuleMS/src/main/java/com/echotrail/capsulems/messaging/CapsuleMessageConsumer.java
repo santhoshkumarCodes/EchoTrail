@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.cassandra.core.CassandraTemplate;
+import org.springframework.data.cassandra.core.CassandraBatchOperations;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ public class CapsuleMessageConsumer {
 
     private final ObjectMapper objectMapper;
     private final CapsuleChainRepository capsuleChainRepository;
+    private final CassandraTemplate cassandraTemplate;
 
     @KafkaListener(topics = "capsule.public.outbox", groupId = "capsule-ms")
     public void consume(String message) {
@@ -67,11 +70,13 @@ public class CapsuleMessageConsumer {
                         Long prevId = capsuleChain.getPreviousCapsuleId();
                         Long nextId = capsuleChain.getNextCapsuleId();
 
+                        CassandraBatchOperations batchOps = cassandraTemplate.batchOps();
+
                         if (prevId != null) {
                             log.info("Updating previous capsule {} nextId to {}", prevId, nextId);
                             capsuleChainRepository.findById(prevId).ifPresent(prev -> {
                                 prev.setNextCapsuleId(nextId);
-                                capsuleChainRepository.save(prev);
+                                batchOps.update(prev);
                             });
                         }
 
@@ -79,11 +84,13 @@ public class CapsuleMessageConsumer {
                             log.info("Updating next capsule {} previousId to {}", nextId, prevId);
                             capsuleChainRepository.findById(nextId).ifPresent(next -> {
                                 next.setPreviousCapsuleId(prevId);
-                                capsuleChainRepository.save(next);
+                                batchOps.update(next);
                             });
                         }
 
-                        capsuleChainRepository.delete(capsuleChain);
+                        batchOps.delete(capsuleChain);
+                        batchOps.execute();
+
                         log.info("Deleted and re-linked capsule chain for capsule id: {}", capsuleId);
                     } else {
                         log.warn("Capsule chain not found for capsuleId: {}. Skipping chain deletion.", capsuleId);
