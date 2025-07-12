@@ -1,7 +1,9 @@
 package com.echotrail.capsulems.outbox;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,8 +23,10 @@ public class OutboxEventPublisher {
                     .payload(payloadJson)
                     .build();
             outboxEventRepository.save(outboxEvent);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to publish outbox event", e);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Failed to serialize payload to JSON", e);
+        } catch (DataAccessException e) {
+            throw new RuntimeException("Failed to save outbox event to the database", e);
         }
     }
 }
