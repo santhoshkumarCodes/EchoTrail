@@ -36,7 +36,7 @@ public class CapsuleController {
     @GetMapping
     public ResponseEntity<List<CapsuleResponse>> getUserCapsules(
             @RequestHeader("X-UserId") Long userId,
-            @RequestParam(required = false) Boolean unlocked
+            @RequestParam(required = false, defaultValue = "false") Boolean unlocked
     ) {
         return ResponseEntity.ok(capsuleService.getUserCapsules(userId, unlocked));
     }
