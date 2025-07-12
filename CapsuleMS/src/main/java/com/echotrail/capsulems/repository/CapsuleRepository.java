@@ -14,7 +14,7 @@ public interface CapsuleRepository extends JpaRepository<Capsule, Long> {
     List<Capsule> findByUserIdAndIsUnlocked(Long userId, boolean isUnlocked);
 
     @Query("SELECT c FROM Capsule c WHERE c.unlockAt <= :now AND c.isUnlocked = false")
-    List<Capsule> findCapsulesReadyToUnlock(LocalDateTime now);
+    List<Capsule> findCapsulesReadyToUnlock(@org.springframework.data.repository.query.Param("now") LocalDateTime now);
 
     List<Capsule> findByIsPublicAndIsUnlocked(boolean isPublic, boolean isUnlocked);
 }
