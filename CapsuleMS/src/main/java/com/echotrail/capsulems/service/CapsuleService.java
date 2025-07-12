@@ -9,7 +9,6 @@ import com.echotrail.capsulems.model.Capsule;
 import com.echotrail.capsulems.outbox.OutboxEventPublisher;
 import com.echotrail.capsulems.repository.CapsuleRepository;
 import com.echotrail.capsulems.util.MarkdownProcessor;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +23,6 @@ public class CapsuleService {
     private final CapsuleRepository capsuleRepository;
     private final OutboxEventPublisher outboxEventPublisher;
     private final MarkdownProcessor markdownProcessor;
-    private final ObjectMapper objectMapper;
 
     @Transactional
     public CapsuleResponse createCapsule(Long userId, CapsuleRequest request) {
