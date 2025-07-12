@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CapsuleChainDTO {
+public class LinkNextRequest {
     private Long capsuleId;
-    private Long previousCapsuleId;
     private Long nextCapsuleId;
-    private Long userId;
 }
