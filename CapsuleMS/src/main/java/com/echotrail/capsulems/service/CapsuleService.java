@@ -73,7 +73,6 @@ public class CapsuleService {
     }
 
     public List<CapsuleResponse> getUserCapsules(Long userId, Boolean unlocked) {
-        if(unlocked == null) unlocked = false;
         List<Capsule> capsules = capsuleRepository.findByUserIdAndIsUnlocked(userId, unlocked);
         return capsules.stream()
                 .map(this::mapToResponse)

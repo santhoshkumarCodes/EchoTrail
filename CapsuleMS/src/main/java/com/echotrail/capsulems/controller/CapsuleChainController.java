@@ -2,18 +2,16 @@ package com.echotrail.capsulems.controller;
 
 import com.echotrail.capsulems.DTO.CapsuleChainDTO;
 import com.echotrail.capsulems.service.CapsuleChainService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/v1/capsule-chains")
+@RequiredArgsConstructor
 public class CapsuleChainController {
 
-    @Autowired
-    private CapsuleChainService capsuleChainService;
+    private final CapsuleChainService capsuleChainService;
 
     @GetMapping("/{capsuleId}")
     public ResponseEntity<CapsuleChainDTO> getCapsuleChainById(@PathVariable Long capsuleId, @RequestHeader("X-UserId") Long userId) {
