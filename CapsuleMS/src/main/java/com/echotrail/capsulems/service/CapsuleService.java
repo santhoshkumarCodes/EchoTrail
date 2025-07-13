@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -79,8 +80,13 @@ public class CapsuleService {
 
     @Transactional
     public void deleteCapsule(Long userId, Long id) {
-        Capsule capsule = capsuleRepository.findById(id)
-                .orElseThrow(() -> new CapsuleNotFoundException("Capsule not found with id: " + id));
+        Optional<Capsule> optionalCapsule = capsuleRepository.findById(id);
+
+        if (optionalCapsule.isEmpty()) {
+            return; // Idempotent: if capsule doesn't exist, do nothing
+        }
+
+        Capsule capsule = optionalCapsule.get();
 
         if (!capsule.getUserId().equals(userId)) {
             throw new UnauthorizedAccessException("User not authorized to delete this capsule.");

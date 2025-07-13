@@ -79,24 +79,23 @@ public class CapsuleMessageConsumer {
                         Long nextId = capsuleChain.getNextCapsuleId();
 
                         CassandraBatchOperations batchOps = cassandraTemplate.batchOps();
-
-                        if (prevId != null) {
-                            log.info("Updating previous capsule {} nextId to {}", prevId, nextId);
-                            capsuleChainRepository.findById(prevId).ifPresent(prev -> {
-                                prev.setNextCapsuleId(nextId);
-                                batchOps.update(prev);
-                            });
-                        }
-
-                        if (nextId != null) {
-                            log.info("Updating next capsule {} previousId to {}", nextId, prevId);
-                            capsuleChainRepository.findById(nextId).ifPresent(next -> {
-                                next.setPreviousCapsuleId(prevId);
-                                batchOps.update(next);
-                            });
-                        }
-
                         batchOps.delete(capsuleChain);
+
+                        if (prevId != null && nextId != null) {
+                            // Case 1: The deleted capsule is in the middle of the chain
+                            log.info("Relinking previous capsule {} to next capsule {}", prevId, nextId);
+                            updateChainLink(batchOps, prevId, "next_capsule_id", nextId);
+                            updateChainLink(batchOps, nextId, "previous_capsule_id", prevId);
+                        } else if (prevId != null) {
+                            // Case 2: The deleted capsule is at the end of the chain
+                            log.info("Updating previous capsule {} to mark the end of the chain", prevId);
+                            updateChainLink(batchOps, prevId, "next_capsule_id", null);
+                        } else if (nextId != null) {
+                            // Case 3: The deleted capsule is at the beginning of the chain
+                            log.info("Updating next capsule {} to mark the beginning of the chain", nextId);
+                            updateChainLink(batchOps, nextId, "previous_capsule_id", null);
+                        }
+
                         batchOps.execute();
 
                         log.info("Deleted and re-linked capsule chain for capsule id: {}", capsuleId);
@@ -117,5 +116,12 @@ public class CapsuleMessageConsumer {
     @DltHandler
     public void dlt(String message) {
         log.error("Message moved to DLT: {}", message);
+    }
+
+    private void updateChainLink(CassandraBatchOperations batchOps, Long capsuleId, String fieldToUpdate, Long value) {
+        capsuleChainRepository.findById(capsuleId).ifPresent(chain -> {
+            chain.setNextCapsuleId(value);
+            batchOps.update(chain);
+        });
     }
 }

@@ -57,33 +57,35 @@ public class CapsuleChainService {
         if (java.util.Objects.equals(capsuleId, previousCapsuleId)) {
             throw new IllegalArgumentException("A capsule cannot be linked to itself.");
         }
-        CapsuleChain capsuleChain = getAndAuthorize(capsuleId, userId);
-        CapsuleChain previousCapsuleChain = getAndAuthorize(previousCapsuleId, userId);
+        getAndAuthorize(capsuleId, userId);
+        getAndAuthorize(previousCapsuleId, userId);
 
-        if (previousCapsuleChain.getNextCapsuleId() != null) {
-            throw new IllegalStateException("Previous capsule already has a next capsule.");
+        if (!capsuleChainRepository.setNextCapsuleIdIfNull(previousCapsuleId, capsuleId)) {
+            throw new IllegalStateException("Previous capsule is already linked to another capsule. Operation failed.");
         }
 
-        capsuleChain.setPreviousCapsuleId(previousCapsuleId);
-        previousCapsuleChain.setNextCapsuleId(capsuleId);
-
-        cassandraTemplate.batchOps().update(capsuleChain).update(previousCapsuleChain).execute();
+        if (!capsuleChainRepository.setPreviousCapsuleIdIfNull(capsuleId, previousCapsuleId)) {
+            // Rollback
+            capsuleChainRepository.clearNextCapsuleId(previousCapsuleId);
+            throw new IllegalStateException("Current capsule is already linked to another capsule. Operation failed and rolled back.");
+        }
     }
 
     public void setNextCapsuleId(Long capsuleId, Long nextCapsuleId, Long userId) {
         if (java.util.Objects.equals(capsuleId, nextCapsuleId)) {
             throw new IllegalArgumentException("A capsule cannot be linked to itself.");
         }
-        CapsuleChain capsuleChain = getAndAuthorize(capsuleId, userId);
-        CapsuleChain nextCapsuleChain = getAndAuthorize(nextCapsuleId, userId);
+        getAndAuthorize(capsuleId, userId);
+        getAndAuthorize(nextCapsuleId, userId);
 
-        if (nextCapsuleChain.getPreviousCapsuleId() != null) {
-            throw new IllegalStateException("Next capsule already has a previous capsule.");
+        if (!capsuleChainRepository.setPreviousCapsuleIdIfNull(nextCapsuleId, capsuleId)) {
+            throw new IllegalStateException("Next capsule is already linked to another capsule. Operation failed.");
         }
 
-        capsuleChain.setNextCapsuleId(nextCapsuleId);
-        nextCapsuleChain.setPreviousCapsuleId(capsuleId);
-
-        cassandraTemplate.batchOps().update(capsuleChain).update(nextCapsuleChain).execute();
+        if (!capsuleChainRepository.setNextCapsuleIdIfNull(capsuleId, nextCapsuleId)) {
+            // Rollback
+            capsuleChainRepository.clearPreviousCapsuleId(nextCapsuleId);
+            throw new IllegalStateException("Current capsule is already linked to another capsule. Operation failed and rolled back.");
+        }
     }
 }
