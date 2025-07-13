@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import org.springframework.retry.annotation.Retryable;
+import org.springframework.retry.annotation.Backoff;
+
 @Service
 @RequiredArgsConstructor
 public class CapsuleChainService {
@@ -59,6 +62,7 @@ public class CapsuleChainService {
         linkCapsules(capsuleId, nextCapsuleId, userId, false);
     }
 
+    @Retryable(value = {IllegalStateException.class}, maxAttempts = 3, backoff = @Backoff(delay = 100))
     private void linkCapsules(Long capsuleId, Long linkedCapsuleId, Long userId, boolean isPrevious) {
         if (java.util.Objects.equals(capsuleId, linkedCapsuleId)) {
             throw new IllegalArgumentException("A capsule cannot be linked to itself.");
