@@ -120,7 +120,11 @@ public class CapsuleMessageConsumer {
 
     private void updateChainLink(CassandraBatchOperations batchOps, Long capsuleId, String fieldToUpdate, Long value) {
         capsuleChainRepository.findById(capsuleId).ifPresent(chain -> {
-            chain.setNextCapsuleId(value);
+            if ("next_capsule_id".equals(fieldToUpdate)) {
+                chain.setNextCapsuleId(value);
+            } else if ("previous_capsule_id".equals(fieldToUpdate)) {
+                chain.setPreviousCapsuleId(value);
+            }
             batchOps.update(chain);
         });
     }

@@ -27,14 +27,7 @@ public class CapsuleService {
 
     @Transactional
     public CapsuleResponse createCapsule(Long userId, CapsuleRequest request) {
-        Capsule capsule = new Capsule();
-        capsule.setUserId(userId);
-        capsule.setTitle(request.getTitle());
-        capsule.setContentMarkdown(request.getContentMarkdown());
-        capsule.setContentHtml(markdownProcessor.toHtml(request.getContentMarkdown()));
-        capsule.setPublic(request.isPublic());
-        capsule.setChained(request.isChained());
-        capsule.setUnlockAt(request.getUnlockAt());
+        Capsule capsule = toCapsule(userId, request);
         Capsule savedCapsule = capsuleRepository.save(capsule);
 
         outboxEventPublisher.publish(
@@ -45,6 +38,18 @@ public class CapsuleService {
         );
 
         return mapToResponse(savedCapsule);
+    }
+
+    private Capsule toCapsule(Long userId, CapsuleRequest request) {
+        Capsule capsule = new Capsule();
+        capsule.setUserId(userId);
+        capsule.setTitle(request.getTitle());
+        capsule.setContentMarkdown(request.getContentMarkdown());
+        capsule.setContentHtml(markdownProcessor.toHtml(request.getContentMarkdown()));
+        capsule.setPublic(request.isPublic());
+        capsule.setChained(request.isChained());
+        capsule.setUnlockAt(request.getUnlockAt());
+        return capsule;
     }
 
     public CapsuleResponse getCapsule(Long userId, Long capsuleId) {
@@ -80,25 +85,19 @@ public class CapsuleService {
 
     @Transactional
     public void deleteCapsule(Long userId, Long id) {
-        Optional<Capsule> optionalCapsule = capsuleRepository.findById(id);
+        capsuleRepository.findById(id).ifPresent(capsule -> {
+            if (!capsule.getUserId().equals(userId)) {
+                throw new UnauthorizedAccessException("User not authorized to delete this capsule.");
+            }
 
-        if (optionalCapsule.isEmpty()) {
-            return; // Idempotent: if capsule doesn't exist, do nothing
-        }
+            capsuleRepository.delete(capsule);
 
-        Capsule capsule = optionalCapsule.get();
-
-        if (!capsule.getUserId().equals(userId)) {
-            throw new UnauthorizedAccessException("User not authorized to delete this capsule.");
-        }
-
-        capsuleRepository.delete(capsule);
-
-        outboxEventPublisher.publish(
-                "Capsule",
-                id.toString(),
-                "CapsuleDeleted",
-                new CapsuleDeletePayload(id, capsule.isChained())
-        );
+            outboxEventPublisher.publish(
+                    "Capsule",
+                    id.toString(),
+                    "CapsuleDeleted",
+                    new CapsuleDeletePayload(id, capsule.isChained())
+            );
+        });
     }
 }

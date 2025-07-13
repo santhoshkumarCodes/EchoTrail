@@ -6,7 +6,6 @@ import com.echotrail.capsulems.exception.UnauthorizedAccessException;
 import com.echotrail.capsulems.model.CapsuleChain;
 import com.echotrail.capsulems.repository.CapsuleChainRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.cassandra.core.CassandraTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,7 +15,6 @@ import java.util.Optional;
 public class CapsuleChainService {
 
     private final CapsuleChainRepository capsuleChainRepository;
-    private final CassandraTemplate cassandraTemplate;
 
     private CapsuleChain getAndAuthorize(Long capsuleId, Long userId) {
         CapsuleChain capsuleChain = capsuleChainRepository.findById(capsuleId)
@@ -54,38 +52,36 @@ public class CapsuleChainService {
     }
 
     public void setPreviousCapsuleId(Long capsuleId, Long previousCapsuleId, Long userId) {
-        if (java.util.Objects.equals(capsuleId, previousCapsuleId)) {
-            throw new IllegalArgumentException("A capsule cannot be linked to itself.");
-        }
-        getAndAuthorize(capsuleId, userId);
-        getAndAuthorize(previousCapsuleId, userId);
-
-        if (!capsuleChainRepository.setNextCapsuleIdIfNull(previousCapsuleId, capsuleId)) {
-            throw new IllegalStateException("Previous capsule is already linked to another capsule. Operation failed.");
-        }
-
-        if (!capsuleChainRepository.setPreviousCapsuleIdIfNull(capsuleId, previousCapsuleId)) {
-            // Rollback
-            capsuleChainRepository.clearNextCapsuleId(previousCapsuleId);
-            throw new IllegalStateException("Current capsule is already linked to another capsule. Operation failed and rolled back.");
-        }
+        linkCapsules(capsuleId, previousCapsuleId, userId, true);
     }
 
     public void setNextCapsuleId(Long capsuleId, Long nextCapsuleId, Long userId) {
-        if (java.util.Objects.equals(capsuleId, nextCapsuleId)) {
+        linkCapsules(capsuleId, nextCapsuleId, userId, false);
+    }
+
+    private void linkCapsules(Long capsuleId, Long linkedCapsuleId, Long userId, boolean isPrevious) {
+        if (java.util.Objects.equals(capsuleId, linkedCapsuleId)) {
             throw new IllegalArgumentException("A capsule cannot be linked to itself.");
         }
         getAndAuthorize(capsuleId, userId);
-        getAndAuthorize(nextCapsuleId, userId);
+        getAndAuthorize(linkedCapsuleId, userId);
 
-        if (!capsuleChainRepository.setPreviousCapsuleIdIfNull(nextCapsuleId, capsuleId)) {
-            throw new IllegalStateException("Next capsule is already linked to another capsule. Operation failed.");
-        }
-
-        if (!capsuleChainRepository.setNextCapsuleIdIfNull(capsuleId, nextCapsuleId)) {
-            // Rollback
-            capsuleChainRepository.clearPreviousCapsuleId(nextCapsuleId);
-            throw new IllegalStateException("Current capsule is already linked to another capsule. Operation failed and rolled back.");
+        if (isPrevious) {
+            if (!capsuleChainRepository.setNextCapsuleIdIfNull(linkedCapsuleId, capsuleId)) {
+                throw new IllegalStateException("Previous capsule is already linked to another capsule. Operation failed.");
+            }
+            if (!capsuleChainRepository.setPreviousCapsuleIdIfNull(capsuleId, linkedCapsuleId)) {
+                capsuleChainRepository.clearNextCapsuleId(linkedCapsuleId);
+                throw new IllegalStateException("Current capsule is already linked to another capsule. Operation failed and rolled back.");
+            }
+        } else {
+            if (!capsuleChainRepository.setPreviousCapsuleIdIfNull(linkedCapsuleId, capsuleId)) {
+                throw new IllegalStateException("Next capsule is already linked to another capsule. Operation failed.");
+            }
+            if (!capsuleChainRepository.setNextCapsuleIdIfNull(capsuleId, linkedCapsuleId)) {
+                capsuleChainRepository.clearPreviousCapsuleId(linkedCapsuleId);
+                throw new IllegalStateException("Current capsule is already linked to another capsule. Operation failed and rolled back.");
+            }
         }
     }
 }

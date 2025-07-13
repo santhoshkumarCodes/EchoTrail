@@ -4,6 +4,7 @@ import com.echotrail.capsulems.DTO.CapsuleChainDTO;
 import com.echotrail.capsulems.DTO.LinkNextRequest;
 import com.echotrail.capsulems.DTO.LinkPreviousRequest;
 import com.echotrail.capsulems.service.CapsuleChainService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,13 +38,13 @@ public class CapsuleChainController {
     }
 
     @PutMapping("/link/previous")
-    public ResponseEntity<Void> setPreviousCapsule(@RequestBody LinkPreviousRequest linkDTO, @RequestHeader("X-UserId") Long userId) {
+    public ResponseEntity<Void> setPreviousCapsule(@Valid @RequestBody LinkPreviousRequest linkDTO, @RequestHeader("X-UserId") Long userId) {
         capsuleChainService.setPreviousCapsuleId(linkDTO.getCapsuleId(), linkDTO.getPreviousCapsuleId(), userId);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/link/next")
-    public ResponseEntity<Void> setNextCapsule(@RequestBody LinkNextRequest linkDTO, @RequestHeader("X-UserId") Long userId) {
+    public ResponseEntity<Void> setNextCapsule(@Valid @RequestBody LinkNextRequest linkDTO, @RequestHeader("X-UserId") Long userId) {
         capsuleChainService.setNextCapsuleId(linkDTO.getCapsuleId(), linkDTO.getNextCapsuleId(), userId);
         return ResponseEntity.ok().build();
     }

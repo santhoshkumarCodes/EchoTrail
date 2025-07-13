@@ -11,7 +11,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.cassandra.core.CassandraBatchOperations;
+import org.springframework.data.cassandra.core.CassandraTemplate;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -124,18 +128,18 @@ class CapsuleChainServiceTest {
 
     @Test
     void setPreviousCapsuleId_shouldThrowException_whenAlreadyLinked() {
+        capsuleChain1.setNextCapsuleId(3L);
         when(capsuleChainRepository.findById(1L)).thenReturn(Optional.of(capsuleChain1));
         when(capsuleChainRepository.findById(2L)).thenReturn(Optional.of(capsuleChain2));
-        when(capsuleChainRepository.setNextCapsuleIdIfNull(1L, 2L)).thenReturn(false);
 
         assertThrows(IllegalStateException.class, () -> capsuleChainService.setPreviousCapsuleId(2L, 1L, 1L));
     }
 
     @Test
     void setNextCapsuleId_shouldThrowException_whenAlreadyLinked() {
+        capsuleChain1.setNextCapsuleId(3L);
         when(capsuleChainRepository.findById(1L)).thenReturn(Optional.of(capsuleChain1));
         when(capsuleChainRepository.findById(2L)).thenReturn(Optional.of(capsuleChain2));
-        when(capsuleChainRepository.setPreviousCapsuleIdIfNull(2L, 1L)).thenReturn(false);
 
         assertThrows(IllegalStateException.class, () -> capsuleChainService.setNextCapsuleId(1L, 2L, 1L));
     }
