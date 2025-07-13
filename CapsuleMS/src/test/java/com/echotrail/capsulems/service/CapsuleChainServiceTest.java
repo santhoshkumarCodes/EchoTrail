@@ -11,11 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.cassandra.core.CassandraBatchOperations;
-import org.springframework.data.cassandra.core.CassandraTemplate;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,12 +24,6 @@ class CapsuleChainServiceTest {
     @Mock
     private CapsuleChainRepository capsuleChainRepository;
 
-    @Mock
-    private CassandraTemplate cassandraTemplate;
-
-    @Mock
-    private CassandraBatchOperations batchOps;
-
     @InjectMocks
     private CapsuleChainService capsuleChainService;
 
@@ -44,8 +34,6 @@ class CapsuleChainServiceTest {
     void setUp() {
         capsuleChain1 = new CapsuleChain(1L, null, 2L, 1L);
         capsuleChain2 = new CapsuleChain(2L, 1L, null, 1L);
-        lenient().when(cassandraTemplate.batchOps()).thenReturn(batchOps);
-        lenient().when(batchOps.update(any(CapsuleChain.class))).thenReturn(batchOps);
     }
 
     @Test
@@ -93,12 +81,13 @@ class CapsuleChainServiceTest {
         CapsuleChain capsuleChain4 = new CapsuleChain(4L, null, null, 1L);
         when(capsuleChainRepository.findById(3L)).thenReturn(Optional.of(capsuleChain3));
         when(capsuleChainRepository.findById(4L)).thenReturn(Optional.of(capsuleChain4));
+        when(capsuleChainRepository.setNextCapsuleIdIfNull(3L, 4L)).thenReturn(true);
+        when(capsuleChainRepository.setPreviousCapsuleIdIfNull(4L, 3L)).thenReturn(true);
 
         capsuleChainService.setPreviousCapsuleId(4L, 3L, 1L);
 
-        assertThat(capsuleChain4.getPreviousCapsuleId()).isEqualTo(3L);
-        assertThat(capsuleChain3.getNextCapsuleId()).isEqualTo(4L);
-        verify(batchOps, times(1)).execute();
+        verify(capsuleChainRepository).setNextCapsuleIdIfNull(3L, 4L);
+        verify(capsuleChainRepository).setPreviousCapsuleIdIfNull(4L, 3L);
     }
 
     @Test
@@ -107,12 +96,13 @@ class CapsuleChainServiceTest {
         CapsuleChain capsuleChain4 = new CapsuleChain(4L, null, null, 1L);
         when(capsuleChainRepository.findById(3L)).thenReturn(Optional.of(capsuleChain3));
         when(capsuleChainRepository.findById(4L)).thenReturn(Optional.of(capsuleChain4));
+        when(capsuleChainRepository.setPreviousCapsuleIdIfNull(4L, 3L)).thenReturn(true);
+        when(capsuleChainRepository.setNextCapsuleIdIfNull(3L, 4L)).thenReturn(true);
 
         capsuleChainService.setNextCapsuleId(3L, 4L, 1L);
 
-        assertThat(capsuleChain3.getNextCapsuleId()).isEqualTo(4L);
-        assertThat(capsuleChain4.getPreviousCapsuleId()).isEqualTo(3L);
-        verify(batchOps, times(1)).execute();
+        verify(capsuleChainRepository).setPreviousCapsuleIdIfNull(4L, 3L);
+        verify(capsuleChainRepository).setNextCapsuleIdIfNull(3L, 4L);
     }
 
     @Test
@@ -134,18 +124,18 @@ class CapsuleChainServiceTest {
 
     @Test
     void setPreviousCapsuleId_shouldThrowException_whenAlreadyLinked() {
-        capsuleChain1.setNextCapsuleId(3L);
         when(capsuleChainRepository.findById(1L)).thenReturn(Optional.of(capsuleChain1));
         when(capsuleChainRepository.findById(2L)).thenReturn(Optional.of(capsuleChain2));
+        when(capsuleChainRepository.setNextCapsuleIdIfNull(1L, 2L)).thenReturn(false);
 
         assertThrows(IllegalStateException.class, () -> capsuleChainService.setPreviousCapsuleId(2L, 1L, 1L));
     }
 
     @Test
     void setNextCapsuleId_shouldThrowException_whenAlreadyLinked() {
-        capsuleChain1.setNextCapsuleId(3L);
         when(capsuleChainRepository.findById(1L)).thenReturn(Optional.of(capsuleChain1));
         when(capsuleChainRepository.findById(2L)).thenReturn(Optional.of(capsuleChain2));
+        when(capsuleChainRepository.setPreviousCapsuleIdIfNull(2L, 1L)).thenReturn(false);
 
         assertThrows(IllegalStateException.class, () -> capsuleChainService.setNextCapsuleId(1L, 2L, 1L));
     }

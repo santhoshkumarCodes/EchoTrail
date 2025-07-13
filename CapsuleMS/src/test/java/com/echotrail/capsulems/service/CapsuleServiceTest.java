@@ -5,7 +5,6 @@ import com.echotrail.capsulems.DTO.CapsuleResponse;
 import com.echotrail.capsulems.exception.CapsuleNotFoundException;
 import com.echotrail.capsulems.exception.UnauthorizedAccessException;
 import com.echotrail.capsulems.model.Capsule;
-import com.echotrail.capsulems.model.CapsuleChain;
 import com.echotrail.capsulems.outbox.OutboxEventPublisher;
 import com.echotrail.capsulems.repository.CapsuleRepository;
 import com.echotrail.capsulems.util.MarkdownProcessor;
@@ -167,10 +166,24 @@ class CapsuleServiceTest {
     }
 
     @Test
-    void deleteCapsule_shouldThrowNotFound_whenCapsuleDoesNotExist() {
+    void deleteCapsule_shouldNotThrowException_whenCapsuleDoesNotExist() {
         when(capsuleRepository.findById(1L)).thenReturn(Optional.empty());
 
-        assertThrows(CapsuleNotFoundException.class, () -> capsuleService.deleteCapsule(1L, 1L));
+        capsuleService.deleteCapsule(1L, 1L);
+
+        verify(capsuleRepository, never()).delete(any(Capsule.class));
+        verify(outboxEventPublisher, never()).publish(any(), any(), any(), any());
+    }
+
+    @Test
+    void deleteCapsule_shouldBeIdempotent_whenCapsuleDoesNotExist() {
+        when(capsuleRepository.findById(1L)).thenReturn(Optional.empty());
+
+        capsuleService.deleteCapsule(1L, 1L);
+        capsuleService.deleteCapsule(1L, 1L); // Call it again
+
+        verify(capsuleRepository, never()).delete(any(Capsule.class));
+        verify(outboxEventPublisher, never()).publish(any(), any(), any(), any());
     }
 
     @Test
