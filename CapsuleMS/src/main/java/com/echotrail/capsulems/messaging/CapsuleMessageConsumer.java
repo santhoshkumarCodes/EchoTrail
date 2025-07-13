@@ -50,13 +50,13 @@ public class CapsuleMessageConsumer {
             }
 
             String eventType = afterNode.path("event_type").asText();
-            String eventPayload = afterNode.path("payload").asText();
+            String eventPayloadStr = afterNode.path("payload").asText();
+            JsonNode eventPayload = objectMapper.readTree(eventPayloadStr);
 
             if ("CapsuleCreated".equals(eventType)) {
-                JsonNode capsulePayload = objectMapper.readTree(eventPayload);
-                if (capsulePayload.path("chained").asBoolean()) {
-                    long capsuleId = capsulePayload.path("id").asLong();
-                    long userId = capsulePayload.path("userId").asLong();
+                if (eventPayload.path("chained").asBoolean()) {
+                    long capsuleId = eventPayload.path("id").asLong();
+                    long userId = eventPayload.path("userId").asLong();
                     if (capsuleChainRepository.findById(capsuleId).isEmpty()) {
                         CapsuleChain capsuleChain = new CapsuleChain();
                         capsuleChain.setCapsuleId(capsuleId);
@@ -66,9 +66,8 @@ public class CapsuleMessageConsumer {
                     }
                 }
             } else if ("CapsuleDeleted".equals(eventType)) {
-                JsonNode deletePayload = objectMapper.readTree(eventPayload);
-                long capsuleId = deletePayload.path("id").asLong();
-                boolean isChained = deletePayload.path("isChained").asBoolean();
+                long capsuleId = eventPayload.path("id").asLong();
+                boolean isChained = eventPayload.path("chained").asBoolean();
 
                 if (isChained) {
                     log.info("Capsule {} is chained. Attempting to delete chain.", capsuleId);

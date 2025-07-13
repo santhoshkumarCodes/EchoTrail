@@ -93,7 +93,7 @@ class CapsuleMessageConsumerTest {
     @Test
     void consume_CapsuleDeleted_Chained() throws Exception {
         // Given
-        String deletePayloadContent = "{\"id\":1,\"isChained\":true}";
+        String deletePayloadContent = "{\"id\":1,\"chained\":true}";
 
         ObjectNode afterNode = objectMapper.createObjectNode();
         afterNode.put("event_type", "CapsuleDeleted");
