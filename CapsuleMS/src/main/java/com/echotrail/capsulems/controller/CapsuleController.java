@@ -5,6 +5,7 @@ import com.echotrail.capsulems.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class CapsuleController {
     @PostMapping
     public ResponseEntity<CapsuleResponse> createCapsule(
             @RequestHeader("X-UserId") Long userId,
-            @RequestBody CapsuleRequest request
+            @Valid @RequestBody CapsuleRequest request
     ) {
         CapsuleResponse createdCapsule = capsuleService.createCapsule(userId, request);
         return new ResponseEntity<>(createdCapsule, HttpStatus.CREATED);
