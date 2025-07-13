@@ -1,22 +1,24 @@
 package com.echotrail.capsulems.messaging;
 
+import com.echotrail.capsulems.messaging.dto.After;
+import com.echotrail.capsulems.messaging.dto.DebeziumMessage;
+import com.echotrail.capsulems.messaging.dto.DebeziumPayload;
+import com.echotrail.capsulems.messaging.dto.EventPayload;
 import com.echotrail.capsulems.model.CapsuleChain;
 import com.echotrail.capsulems.repository.CapsuleChainRepository;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.cassandra.core.CassandraTemplate;
 import org.springframework.data.cassandra.core.CassandraBatchOperations;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-
+import org.springframework.data.cassandra.core.CassandraTemplate;
 import org.springframework.kafka.annotation.DltHandler;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.RetryableTopic;
 import org.springframework.kafka.retrytopic.TopicSuffixingStrategy;
 import org.springframework.retry.annotation.Backoff;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -27,6 +29,9 @@ public class CapsuleMessageConsumer {
     private final CapsuleChainRepository capsuleChainRepository;
     private final CassandraTemplate cassandraTemplate;
 
+    private static final String NEXT_CAPSULE_ID_FIELD = "next_capsule_id";
+    private static final String PREVIOUS_CAPSULE_ID_FIELD = "previous_capsule_id";
+
     @RetryableTopic(
             attempts = "3",
             backoff = @Backoff(delay = 1000, multiplier = 2.0),
@@ -35,28 +40,22 @@ public class CapsuleMessageConsumer {
     public void consume(String message) {
         log.info("Received message: {}", message);
         try {
-            JsonNode rootNode = objectMapper.readTree(message);
-            JsonNode payloadNode = rootNode.path("payload");
+            DebeziumMessage debeziumMessage = objectMapper.readValue(message, DebeziumMessage.class);
+            DebeziumPayload payload = debeziumMessage.getPayload();
 
-            if (payloadNode.isMissingNode() || payloadNode.isNull()) {
-                log.warn("Payload is missing or null, skipping message");
+            if (payload == null || payload.getAfter() == null) {
+                log.warn("Payload or after node is missing or null, skipping message");
                 return;
             }
 
-            JsonNode afterNode = payloadNode.path("after");
-            if (afterNode.isMissingNode() || afterNode.isNull()) {
-                log.warn("After node is missing or null, skipping message");
-                return;
-            }
-
-            String eventType = afterNode.path("event_type").asText();
-            String eventPayloadStr = afterNode.path("payload").asText();
-            JsonNode eventPayload = objectMapper.readTree(eventPayloadStr);
+            After after = payload.getAfter();
+            String eventType = after.getEventType();
+            EventPayload eventPayload = objectMapper.readValue(after.getPayload(), EventPayload.class);
 
             if ("CapsuleCreated".equals(eventType)) {
-                if (eventPayload.path("chained").asBoolean()) {
-                    long capsuleId = eventPayload.path("id").asLong();
-                    long userId = eventPayload.path("userId").asLong();
+                if (eventPayload.isChained()) {
+                    long capsuleId = eventPayload.getId();
+                    long userId = eventPayload.getUserId();
                     if (capsuleChainRepository.findById(capsuleId).isEmpty()) {
                         CapsuleChain capsuleChain = new CapsuleChain();
                         capsuleChain.setCapsuleId(capsuleId);
@@ -66,8 +65,8 @@ public class CapsuleMessageConsumer {
                     }
                 }
             } else if ("CapsuleDeleted".equals(eventType)) {
-                long capsuleId = eventPayload.path("id").asLong();
-                boolean isChained = eventPayload.path("chained").asBoolean();
+                long capsuleId = eventPayload.getId();
+                boolean isChained = eventPayload.isChained();
 
                 if (isChained) {
                     log.info("Capsule {} is chained. Attempting to delete chain.", capsuleId);
@@ -84,16 +83,16 @@ public class CapsuleMessageConsumer {
                         if (prevId != null && nextId != null) {
                             // Case 1: The deleted capsule is in the middle of the chain
                             log.info("Relinking previous capsule {} to next capsule {}", prevId, nextId);
-                            updateChainLink(batchOps, prevId, "next_capsule_id", nextId);
-                            updateChainLink(batchOps, nextId, "previous_capsule_id", prevId);
+                            updateChainLink(batchOps, prevId, NEXT_CAPSULE_ID_FIELD, nextId);
+                            updateChainLink(batchOps, nextId, PREVIOUS_CAPSULE_ID_FIELD, prevId);
                         } else if (prevId != null) {
                             // Case 2: The deleted capsule is at the end of the chain
                             log.info("Updating previous capsule {} to mark the end of the chain", prevId);
-                            updateChainLink(batchOps, prevId, "next_capsule_id", null);
+                            updateChainLink(batchOps, prevId, NEXT_CAPSULE_ID_FIELD, null);
                         } else if (nextId != null) {
                             // Case 3: The deleted capsule is at the beginning of the chain
                             log.info("Updating next capsule {} to mark the beginning of the chain", nextId);
-                            updateChainLink(batchOps, nextId, "previous_capsule_id", null);
+                            updateChainLink(batchOps, nextId, PREVIOUS_CAPSULE_ID_FIELD, null);
                         }
 
                         batchOps.execute();
@@ -120,9 +119,9 @@ public class CapsuleMessageConsumer {
 
     private void updateChainLink(CassandraBatchOperations batchOps, Long capsuleId, String fieldToUpdate, Long value) {
         capsuleChainRepository.findById(capsuleId).ifPresent(chain -> {
-            if ("next_capsule_id".equals(fieldToUpdate)) {
+            if (NEXT_CAPSULE_ID_FIELD.equals(fieldToUpdate)) {
                 chain.setNextCapsuleId(value);
-            } else if ("previous_capsule_id".equals(fieldToUpdate)) {
+            } else if (PREVIOUS_CAPSULE_ID_FIELD.equals(fieldToUpdate)) {
                 chain.setPreviousCapsuleId(value);
             }
             batchOps.update(chain);
