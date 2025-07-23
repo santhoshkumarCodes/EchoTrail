@@ -67,11 +67,14 @@ class CapsuleMessageConsumerTest {
     @Test
     void consume_CapsuleCreated_Chained() throws Exception {
         // Given
-        String capsulePayload = "{\"id\":1,\"userId\":1,\"chained\":true}";
+        ObjectNode capsulePayload = objectMapper.createObjectNode();
+        capsulePayload.put("id", 1L);
+        capsulePayload.put("userId", 1L);
+        capsulePayload.put("chained", true);
 
         ObjectNode afterNode = objectMapper.createObjectNode();
         afterNode.put("event_type", "CapsuleCreated");
-        afterNode.put("payload", capsulePayload);
+        afterNode.set("payload", capsulePayload);
 
         ObjectNode payloadNode = objectMapper.createObjectNode();
         payloadNode.set("after", afterNode);
@@ -93,11 +96,13 @@ class CapsuleMessageConsumerTest {
     @Test
     void consume_CapsuleDeleted_Chained() throws Exception {
         // Given
-        String deletePayloadContent = "{\"id\":1,\"chained\":true}";
+        ObjectNode deletePayload = objectMapper.createObjectNode();
+        deletePayload.put("id", 1L);
+        deletePayload.put("chained", true);
 
         ObjectNode afterNode = objectMapper.createObjectNode();
         afterNode.put("event_type", "CapsuleDeleted");
-        afterNode.put("payload", deletePayloadContent);
+        afterNode.set("payload", deletePayload);
 
         ObjectNode payloadNode = objectMapper.createObjectNode();
         payloadNode.set("after", afterNode);
