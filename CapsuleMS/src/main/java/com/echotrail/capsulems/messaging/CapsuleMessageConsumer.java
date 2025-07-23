@@ -50,7 +50,7 @@ public class CapsuleMessageConsumer {
 
             After after = payload.getAfter();
             String eventType = after.getEventType();
-            EventPayload eventPayload = objectMapper.readValue(after.getPayload(), EventPayload.class);
+            EventPayload eventPayload = after.getPayload();
 
             if ("CapsuleCreated".equals(eventType)) {
                 if (eventPayload.isChained()) {
