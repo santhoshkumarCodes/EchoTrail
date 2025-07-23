@@ -9,5 +9,5 @@ import lombok.Data;
 public class After {
     @JsonProperty("event_type")
     private String eventType;
-    private String payload;
+    private EventPayload payload;
 }

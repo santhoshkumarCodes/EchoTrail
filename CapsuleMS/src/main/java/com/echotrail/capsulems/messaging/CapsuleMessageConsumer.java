@@ -50,7 +50,12 @@ public class CapsuleMessageConsumer {
 
             After after = payload.getAfter();
             String eventType = after.getEventType();
-            EventPayload eventPayload = objectMapper.readValue(after.getPayload(), EventPayload.class);
+            EventPayload eventPayload = after.getPayload();
+
+            if (eventPayload == null) {
+                log.warn("Event payload is missing or null, skipping message");
+                return;
+            }
 
             if ("CapsuleCreated".equals(eventType)) {
                 if (eventPayload.isChained()) {
