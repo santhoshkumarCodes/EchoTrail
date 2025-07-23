@@ -52,6 +52,11 @@ public class CapsuleMessageConsumer {
             String eventType = after.getEventType();
             EventPayload eventPayload = after.getPayload();
 
+            if (eventPayload == null) {
+                log.warn("Event payload is missing or null, skipping message");
+                return;
+            }
+
             if ("CapsuleCreated".equals(eventType)) {
                 if (eventPayload.isChained()) {
                     long capsuleId = eventPayload.getId();
