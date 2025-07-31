@@ -173,9 +173,7 @@ services:
       - "8090:8090"
     environment:
       EUREKA_SERVICE_URL: http://service-registry:8761/eureka/
-      USERMS_URL: http://userms:8080
-      CAPSULEMS_URL: http://capsulems:8081
-      FRIENDSHIPMS_URL: http://friendshipms:8082
+      
 
 volumes:
   cassandra-data:

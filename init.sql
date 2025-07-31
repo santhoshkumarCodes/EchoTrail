@@ -11,7 +11,7 @@ CREATE TABLE outbox_event (
     aggregate_type VARCHAR(255) NOT NULL,
     aggregate_id VARCHAR(255) NOT NULL,
     event_type VARCHAR(255) NOT NULL,
-    payload TEXT,
+    payload JSONB,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -49,7 +49,7 @@ CREATE TABLE outbox_event (
     aggregate_type VARCHAR(255) NOT NULL,
     aggregate_id VARCHAR(255) NOT NULL,
     event_type VARCHAR(255) NOT NULL,
-    payload TEXT,
+    payload JSONB,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -60,6 +60,6 @@ CREATE TABLE outbox_event (
     aggregate_type VARCHAR(255) NOT NULL,
     aggregate_id VARCHAR(255) NOT NULL,
     event_type VARCHAR(255) NOT NULL,
-    payload TEXT,
+    payload JSONB,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
