@@ -107,8 +107,10 @@ services:
       context: ./UserMS
     container_name: userms
     depends_on:
-      - service-registry
-      - postgres
+      service-registry:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
     env_file:
       - .env
     ports:
@@ -146,8 +148,10 @@ services:
       context: ./FriendshipMS
     container_name: friendshipms
     depends_on:
-      - service-registry
-      - postgres
+      service-registry:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
     env_file:
       - .env
     ports:
