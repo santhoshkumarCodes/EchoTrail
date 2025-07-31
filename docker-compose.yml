@@ -161,7 +161,8 @@ services:
       context: ./Gateway
     container_name: gateway
     depends_on:
-      - service-registry
+      service-registry:
+        condition: service_healthy
     env_file:
       - .env
     ports:
