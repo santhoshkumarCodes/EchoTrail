@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.3.0
@@ -8,12 +7,22 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "2181:2181"
+    healthcheck:
+      test: ["CMD", "nc", "-vz", "localhost", "2181"]
+      interval: 10s
+      timeout: 5s
+      retries: 60
+    command: >
+      /bin/sh -c
+      "export KAFKA_OPTS='-XX:-UseContainerSupport' &&
+      /etc/confluent/docker/run"
 
   kafka:
     image: confluentinc/cp-kafka:7.3.0
     container_name: kafka
     depends_on:
-      - zookeeper
+      zookeeper:
+        condition: service_healthy
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -22,6 +31,7 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_OPTS: -XX:-UseContainerSupport
     ports:
       - "29092:29092"
     healthcheck:
@@ -41,7 +51,7 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     command: postgres -c wal_level=logical
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U postgres && psql -U postgres -d Friendship -c 'SELECT 1'"]
       interval: 5s
       timeout: 5s
       retries: 60
@@ -97,7 +107,7 @@ services:
       EUREKA_CLIENT_REGISTER_WITH_EUREKA: "false"
       EUREKA_CLIENT_FETCH_REGISTRY: "false"
     healthcheck:
-      test: "curl -f http://localhost:8761/actuator/health"
+      test: ["CMD-SHELL", "curl -f http://localhost:8761/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 60
@@ -130,8 +140,8 @@ services:
         condition: service_healthy
       kafka:
         condition: service_healthy
-      cassandra:
-        condition: service_healthy
+      cassandra-init:
+        condition: service_completed_successfully
     env_file:
       - .env
     ports:
