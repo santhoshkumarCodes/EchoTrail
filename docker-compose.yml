@@ -24,26 +24,60 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
     ports:
       - "29092:29092"
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
 
   postgres:
     image: postgres:14.1
     container_name: postgres
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: Capsules
+    env_file:
+      - .env
     ports:
       - "5433:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     command: postgres -c wal_level=logical
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+
+  cassandra:
+    image: cassandra:4.0
+    container_name: cassandra
+    ports:
+      - "9042:9042"
+    volumes:
+      - cassandra-data:/var/lib/cassandra
+    healthcheck:
+      test: ["CMD", "cqlsh", "-e", "describe keyspaces"]
+      interval: 10s
+      timeout: 10s
+      retries: 30
+      start_period: 90s
+
+  cassandra-init:
+    image: cassandra:4.0
+    depends_on:
+      cassandra:
+        condition: service_healthy
+    volumes:
+      - ./init/init.cql:/init/init.cql
+      - ./init/init.sh:/init/init.sh
+    entrypoint: ["bash", "/init/init.sh"]
 
   debezium:
     image: debezium/connect:2.1
     container_name: debezium
     depends_on:
-      - kafka
-      - postgres
+      kafka:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
     environment:
       BOOTSTRAP_SERVERS: kafka:9092
       GROUP_ID: 1
@@ -52,3 +86,94 @@ services:
       STATUS_STORAGE_TOPIC: debezium_status
     ports:
       - "8083:8083"
+
+  service-registry:
+    build:
+      context: ./ServiceRegistry
+    container_name: service-registry
+    ports:
+      - "8761:8761"
+    environment:
+      EUREKA_CLIENT_REGISTER_WITH_EUREKA: "false"
+      EUREKA_CLIENT_FETCH_REGISTRY: "false"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8761/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 60
+
+  userms:
+    build:
+      context: ./UserMS
+    container_name: userms
+    depends_on:
+      service-registry:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/User
+      EUREKA_SERVICE_URL: http://service-registry:8761/eureka/
+
+  capsulems:
+    build:
+      context: ./CapsuleMS
+    container_name: capsulems
+    depends_on:
+      service-registry:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      cassandra:
+        condition: service_healthy
+    env_file:
+      - .env
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/Capsules
+      EUREKA_SERVICE_URL: http://service-registry:8761/eureka/
+      SPRING_CASSANDRA_CONTACT_POINTS: cassandra
+      SPRING_CASSANDRA_LOCAL_DATACENTER: datacenter1
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
+  friendshipms:
+    build:
+      context: ./FriendshipMS
+    container_name: friendshipms
+    depends_on:
+      service-registry:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/Friendship
+      EUREKA_SERVICE_URL: http://service-registry:8761/eureka/
+
+  gateway:
+    build:
+      context: ./Gateway
+    container_name: gateway
+    depends_on:
+      service-registry:
+        condition: service_healthy
+    env_file:
+      - .env
+    ports:
+      - "8090:8090"
+    environment:
+      EUREKA_SERVICE_URL: http://service-registry:8761/eureka/
+      
+
+volumes:
+  cassandra-data:
