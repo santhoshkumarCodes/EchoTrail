@@ -97,7 +97,7 @@ services:
       EUREKA_CLIENT_REGISTER_WITH_EUREKA: "false"
       EUREKA_CLIENT_FETCH_REGISTRY: "false"
     healthcheck:
-      test: "curl -f http://localhost:8761/actuator/health"
+      test: ["CMD-SHELL", "curl -f http://localhost:8761/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 60
