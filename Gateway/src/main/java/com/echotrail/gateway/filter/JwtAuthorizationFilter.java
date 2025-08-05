@@ -74,9 +74,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                         log.debug("Added userId {} and username {} to request attributes", userId, username);
                     }
                 } catch (FeignException e) {
-                    log.warn("Unable to fetch userId for username {}: [{}] during [{}] to [{}] [{}]: [{}] - Status: {}",
-                            username, e.status(), request.getMethod(), e.request().url(), e.request().requestTemplate().feignTarget().type().getSimpleName(),
-                            e.contentUTF8(), e.status());
+                    log.warn("Unable to fetch userId for username {}: Feign client error - Status: {}, Method: {}, URL: {}",
+                            username, e.status(), e.request().httpMethod(), e.request().url());
                 } catch (Exception e) {
                     log.error("Unexpected error fetching userId for username {}: {}", username, e.getMessage(), e);
                 }
