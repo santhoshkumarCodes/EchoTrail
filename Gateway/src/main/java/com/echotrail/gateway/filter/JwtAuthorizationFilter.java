@@ -56,9 +56,10 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         try {
             if (jwtUtil.validateToken(token)) {
-                // Extract claims and add to request for use in downstream services if needed
                 String username = jwtUtil.extractUsername(token);
-                request.setAttribute("username", username);
+
+                HeaderMapRequestWrapper requestWrapper = new HeaderMapRequestWrapper(request);
+                requestWrapper.addHeader("X-Username", username);
 
                 try {
                     // Fetch userId from UserMS service using Feign client
@@ -68,19 +69,19 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                         Long userId = userIdResponse.getBody();
 
                         // Store userId in request attribute
-                        request.setAttribute("userId", userId);
+                        requestWrapper.addHeader("X-UserId", userId.toString());
 
                         log.debug("Added userId {} and username {} to request attributes", userId, username);
                     }
                 } catch (FeignException e) {
-                    log.warn("Unable to fetch userId for username {}: [{}] during [{}] to [{}] [{}]: [{}] - Status: {}", 
-                          username, e.status(), request.getMethod(), e.request().url(), e.request().requestTemplate().feignTarget().type().getSimpleName(), 
-                          e.contentUTF8(), e.status());
+                    log.warn("Unable to fetch userId for username {}: [{}] during [{}] to [{}] [{}]: [{}] - Status: {}",
+                            username, e.status(), request.getMethod(), e.request().url(), e.request().requestTemplate().feignTarget().type().getSimpleName(),
+                            e.contentUTF8(), e.status());
                 } catch (Exception e) {
                     log.error("Unexpected error fetching userId for username {}: {}", username, e.getMessage(), e);
                 }
 
-                filterChain.doFilter(request, response);
+                filterChain.doFilter(requestWrapper, response);
             } else {
                 log.error("Token validation failed");
                 response.sendError(HttpStatus.UNAUTHORIZED.value(), "Token validation failed");

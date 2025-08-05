@@ -23,10 +23,13 @@ public class JwtConfig {
     @Value("${jwt.prefix:Bearer }")
     private String prefix;
 
+    @Value("${cors.allowed-origins}")
+    private String[] allowedOrigins;
+
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.addAllowedOrigin("*");
+        corsConfig.setAllowedOrigins(Arrays.asList(allowedOrigins));
         corsConfig.addAllowedHeader("*");
         corsConfig.addAllowedMethod("*");
         corsConfig.setExposedHeaders(Arrays.asList(
