@@ -30,8 +30,8 @@ public class JwtConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.setAllowedOrigins(Arrays.asList(allowedOrigins));
-        corsConfig.addAllowedHeader("*");
-        corsConfig.addAllowedMethod("*");
+        corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Username", "X-UserId"));
+        corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         corsConfig.setExposedHeaders(Arrays.asList(
             "X-UserId", "X-Username", "Authorization", "Content-Type", "Access-Control-Allow-Origin"
         ));
