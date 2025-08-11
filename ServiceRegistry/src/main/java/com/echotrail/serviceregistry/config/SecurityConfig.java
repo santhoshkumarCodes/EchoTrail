@@ -26,10 +26,10 @@ public class SecurityConfig {
     private String password;
 
     @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
+    public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails user = User.builder()
                 .username(username)
-                .password(passwordEncoder().encode(password))
+                .password(passwordEncoder.encode(password))
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user);
