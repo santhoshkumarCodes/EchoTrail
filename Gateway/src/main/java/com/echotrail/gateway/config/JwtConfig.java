@@ -14,7 +14,7 @@ import java.util.Arrays;
 @Configuration
 public class JwtConfig {
 
-    @Value("${jwt.secret:defaultSecretKeyToBeOverriddenInProduction}")
+    @Value("${jwt.secret}")
     private String secret;
 
     @Value("${jwt.header:Authorization}")
@@ -23,12 +23,15 @@ public class JwtConfig {
     @Value("${jwt.prefix:Bearer }")
     private String prefix;
 
+    @Value("${cors.allowed-origins}")
+    private String[] allowedOrigins;
+
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.addAllowedOrigin("*");
-        corsConfig.addAllowedHeader("*");
-        corsConfig.addAllowedMethod("*");
+        corsConfig.setAllowedOrigins(Arrays.asList(allowedOrigins));
+        corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Username", "X-UserId"));
+        corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         corsConfig.setExposedHeaders(Arrays.asList(
             "X-UserId", "X-Username", "Authorization", "Content-Type", "Access-Control-Allow-Origin"
         ));
