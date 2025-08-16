@@ -1,6 +1,7 @@
 
 package com.echotrail.userms.service;
 
+import com.echotrail.userms.exception.UserAlreadyExistsException;
 import com.echotrail.userms.model.User;
 import com.echotrail.userms.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,16 +22,16 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User registerNewUser(User user) {
+    public void registerNewUser(User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
-            throw new RuntimeException("Username is already taken!");
+            throw new UserAlreadyExistsException("Username is already taken!");
         }
         if (userRepository.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("Email is already in use!");
+            throw new UserAlreadyExistsException("Email is already in use!");
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     public User findOrCreateOAuth2User(String email, String name) {

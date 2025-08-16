@@ -46,12 +46,8 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
-        try {
-            user.setAuthProvider("JWT");
-            userService.registerNewUser(user);
-            return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
-        }
+        user.setAuthProvider("JWT");
+        userService.registerNewUser(user);
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 }
