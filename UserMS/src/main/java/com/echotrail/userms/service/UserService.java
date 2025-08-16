@@ -2,6 +2,7 @@
 package com.echotrail.userms.service;
 
 import com.echotrail.userms.exception.UserAlreadyExistsException;
+import com.echotrail.userms.model.AuthProvider;
 import com.echotrail.userms.model.User;
 import com.echotrail.userms.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -42,7 +43,7 @@ public class UserService {
                     newUser.setUsername(email.substring(0, email.indexOf('@'))); // Simple username generation
                     newUser.setPassword(passwordEncoder.encode(UUID.randomUUID().toString()));
                     newUser.setName(name);
-                    newUser.setAuthProvider("OAUTH2");
+                    newUser.setAuthProvider(AuthProvider.OAUTH2);
                     return userRepository.save(newUser);
                 });
     }

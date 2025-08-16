@@ -50,7 +50,7 @@ public class UserDetailsController {
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .name(user.getName())
-                .authProvider(user.getAuthProvider())
+                .authProvider(user.getAuthProvider().name())
                 .build();
     }
 }

@@ -21,5 +21,6 @@ public class User {
 
     private String name;
 
-    private String authProvider; // "JWT" or "OAUTH2"
+    @Enumerated(EnumType.STRING)
+    private AuthProvider authProvider;
 }
