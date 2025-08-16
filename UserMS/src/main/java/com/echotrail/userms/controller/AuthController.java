@@ -1,11 +1,11 @@
-package com.example.userms.controller;
+package com.echotrail.userms.controller;
 
-import com.example.userms.dto.LoginRequest;
-import com.example.userms.dto.LoginResponse;
-import com.example.userms.dto.MessageResponse;
-import com.example.userms.model.User;
-import com.example.userms.security.JwtUtil;
-import com.example.userms.service.UserService;
+import com.echotrail.userms.dto.LoginRequest;
+import com.echotrail.userms.dto.LoginResponse;
+import com.echotrail.userms.dto.MessageResponse;
+import com.echotrail.userms.model.User;
+import com.echotrail.userms.security.JwtUtil;
+import com.echotrail.userms.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -47,6 +47,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         try {
+            user.setAuthProvider("JWT");
             userService.registerNewUser(user);
             return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
         } catch (RuntimeException e) {

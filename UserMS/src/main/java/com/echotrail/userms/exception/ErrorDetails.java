@@ -1,4 +1,4 @@
-package com.example.userms.exception;
+package com.echotrail.userms.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,8 +1,8 @@
 
-package com.example.userms.config;
+package com.echotrail.userms.config;
 
-import com.example.userms.security.GatewayAuthenticationFilter;
-import com.example.userms.security.JwtAuthenticationFilter;
+import com.echotrail.userms.security.GatewayAuthenticationFilter;
+import com.echotrail.userms.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -49,7 +49,7 @@ public class SecurityConfig {
                         .failureUrl("/api/auth/oauth2/error")
                 )
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // Changed from STATELESS
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

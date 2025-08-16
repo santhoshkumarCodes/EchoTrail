@@ -1,4 +1,4 @@
-package com.example.userms.exception;
+package com.echotrail.userms.exception;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;

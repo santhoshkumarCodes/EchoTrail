@@ -1,8 +1,8 @@
-package com.example.userms.controller;
+package com.echotrail.userms.controller;
 
-import com.example.userms.model.User;
-import com.example.userms.repository.UserRepository;
-import com.example.userms.dto.UserDetailsDTO;
+import com.echotrail.userms.model.User;
+import com.echotrail.userms.repository.UserRepository;
+import com.echotrail.userms.dto.UserDetailsDTO;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

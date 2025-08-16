@@ -1,4 +1,4 @@
-package com.example.userms.dto;
+package com.echotrail.userms.dto;
 
 import lombok.Builder;
 import lombok.Data;

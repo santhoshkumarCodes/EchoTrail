@@ -1,10 +1,10 @@
-package com.example.userms.controller;
+package com.echotrail.userms.controller;
 
-import com.example.userms.dto.LoginResponse;
-import com.example.userms.dto.MessageResponse;
-import com.example.userms.model.User;
-import com.example.userms.security.JwtUtil;
-import com.example.userms.service.UserService;
+import com.echotrail.userms.dto.LoginResponse;
+import com.echotrail.userms.dto.MessageResponse;
+import com.echotrail.userms.model.User;
+import com.echotrail.userms.security.JwtUtil;
+import com.echotrail.userms.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

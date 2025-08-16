@@ -1,4 +1,4 @@
-package com.example.userms.security;
+package com.echotrail.userms.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

@@ -1,8 +1,8 @@
 
-package com.example.userms.service;
+package com.echotrail.userms.service;
 
-import com.example.userms.model.User;
-import com.example.userms.repository.UserRepository;
+import com.echotrail.userms.model.User;
+import com.echotrail.userms.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

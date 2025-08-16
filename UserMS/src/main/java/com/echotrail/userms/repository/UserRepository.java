@@ -1,6 +1,6 @@
-package com.example.userms.repository;
+package com.echotrail.userms.repository;
 
-import com.example.userms.model.User;
+import com.echotrail.userms.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

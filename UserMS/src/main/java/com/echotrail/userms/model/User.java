@@ -1,4 +1,4 @@
-package com.example.userms.model;
+package com.echotrail.userms.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
