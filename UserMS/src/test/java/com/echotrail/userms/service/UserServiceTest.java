@@ -93,4 +93,20 @@ class UserServiceTest {
         assertEquals("Test User", result.getName());
         verify(userRepository, times(1)).save(any(User.class));
     }
+
+    @Test
+    void givenUsernameExists_whenFindOrCreateOAuth2User_thenCreatesUserWithSuffix() {
+        when(userRepository.findByEmail("test@test.com")).thenReturn(Optional.empty());
+        when(userRepository.existsByUsername("test")).thenReturn(true);
+        when(userRepository.existsByUsername("test1")).thenReturn(false);
+        when(passwordEncoder.encode(any(String.class))).thenReturn("encodedPassword");
+        when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        User result = userService.findOrCreateOAuth2User("test@test.com", "Test User");
+
+        assertEquals("test1", result.getUsername());
+        verify(userRepository, times(1)).save(any(User.class));
+    }
+
+
 }

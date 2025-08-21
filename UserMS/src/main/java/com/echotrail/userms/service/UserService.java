@@ -41,7 +41,14 @@ public class UserService {
                 .orElseGet(() -> {
                     User newUser = new User();
                     newUser.setEmail(email);
-                    newUser.setUsername(email.substring(0, email.indexOf('@'))); // Simple username generation
+                    String baseUsername = email.substring(0, email.indexOf('@'));
+                    String finalUsername = baseUsername;
+                    long suffix = 0;
+                    while (userRepository.existsByUsername(finalUsername)) {
+                        suffix++;
+                        finalUsername = baseUsername + suffix;
+                    }
+                    newUser.setUsername(finalUsername);
                     newUser.setPassword(passwordEncoder.encode(UUID.randomUUID().toString()));
                     newUser.setName(name);
                     newUser.setAuthProvider(AuthProvider.OAUTH2);
