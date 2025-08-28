@@ -1,0 +1,144 @@
+name: EchoTrail CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # Job to scan for secrets using Gitleaks
+  gitleaks:
+    name: Gitleaks Secrets Scanning
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetches all history for Gitleaks to scan
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Job for static analysis security testing (SAST) with CodeQL
+  codeql:
+    name: CodeQL SAST
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: java
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+  # Backend CI Job: builds, tests, and analyzes each microservice
+  backend:
+    name: Backend CI
+    needs: [gitleaks, codeql]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [ '17', '21' ]
+        service: [ 'CapsuleMS', 'FriendshipMS', 'Gateway', 'ServiceRegistry', 'UserMS' ]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'temurin'
+          cache: 'maven'
+
+      # The 'verify' phase runs tests, integration tests (including Testcontainers),
+      # and code coverage (JaCoCo) if configured in the pom.xml
+      - name: Build and test with Maven
+        run: mvn -B verify --file ${{ matrix.service }}/pom.xml
+
+      # SonarCloud Scan runs only on the latest Java version to avoid duplicate reports
+      - name: SonarCloud Scan
+        if: success() && matrix.java == '21'
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          # Specifies the base directory for SonarCloud analysis for each microservice
+          args: >
+            -Dsonar.projectKey=echotrail_${{ matrix.service }}
+            -Dsonar.organization=your-sonarcloud-organization
+            -Dsonar.sources=./src/main/
+            -Dsonar.tests=./src/test/
+            -Dsonar.java.binaries=./target/classes
+            -Dsonar.coverage.jacoco.xmlReportPaths=./target/site/jacoco/jacoco.xml
+          projectBaseDir: ${{ matrix.service }}
+
+  # Docker Job: Lints Dockerfiles, builds images, and scans for vulnerabilities
+  docker:
+    name: Docker Build & Scan
+    needs: backend
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [ 'CapsuleMS', 'FriendshipMS', 'Gateway', 'ServiceRegistry', 'UserMS' ]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ matrix.service }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-${{ matrix.service }}-
+
+      - name: Install Hadolint
+        run: |
+          sudo wget -O /usr/local/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64
+          sudo chmod +x /usr/local/bin/hadolint
+      - name: Lint Dockerfile
+        run: hadolint ${{ matrix.service }}/Dockerfile
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./${{ matrix.service }}
+          file: ./${{ matrix.service }}/Dockerfile
+          push: false # Do not push image to a registry
+          tags: echotrail/${{ matrix.service }}:latest
+          load: true # Load image into docker for scanning
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
+
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+      - name: Scan image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'echotrail/${{ matrix.service }}:latest'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
