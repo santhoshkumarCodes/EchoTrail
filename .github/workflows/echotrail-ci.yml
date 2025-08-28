@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ '17', '21' ]
+        java: [ '21' ]
         service: [ 'CapsuleMS', 'FriendshipMS', 'Gateway', 'ServiceRegistry', 'UserMS' ]
     steps:
       - name: Checkout code
