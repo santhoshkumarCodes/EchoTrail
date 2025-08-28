@@ -62,7 +62,17 @@ jobs:
     strategy:
       matrix:
         java: [ '21' ]
-        service: [ 'CapsuleMS', 'FriendshipMS', 'Gateway', 'ServiceRegistry', 'UserMS' ]
+        service:
+          - name: 'capsulems'
+            path: 'CapsuleMS'
+          - name: 'friendshipms'
+            path: 'FriendshipMS'
+          - name: 'gateway'
+            path: 'Gateway'
+          - name: 'serviceregistry'
+            path: 'ServiceRegistry'
+          - name: 'userms'
+            path: 'UserMS'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -78,15 +88,15 @@ jobs:
           cache: 'maven'
 
       - name: Build and test with Maven
-        run: mvn -B verify --file ${{ matrix.service }}/pom.xml
+        run: mvn -B verify --file ${{ matrix.service.path }}/pom.xml
 
       - name: SonarCloud Scan
         if: matrix.java == '21' # Run scan only on the latest Java version
         run: >
           mvn -B sonar:sonar
-          --file ${{ matrix.service }}/pom.xml
+          --file ${{ matrix.service.path }}/pom.xml
           -Dsonar.projectKey=santhoshkumarCodes_EchoTrail
-          -Dsonar.projectName=${{ matrix.service }}
+          -Dsonar.projectName=${{ matrix.service.name }}
           -Dsonar.host.url=https://sonarcloud.io
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to decorate PRs with analysis results
@@ -99,7 +109,17 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service: [ 'CapsuleMS', 'FriendshipMS', 'Gateway', 'ServiceRegistry', 'UserMS' ]
+        service:
+          - name: 'capsulems'
+            path: 'CapsuleMS'
+          - name: 'friendshipms'
+            path: 'FriendshipMS'
+          - name: 'gateway'
+            path: 'Gateway'
+          - name: 'serviceregistry'
+            path: 'ServiceRegistry'
+          - name: 'userms'
+            path: 'UserMS'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -114,24 +134,24 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ matrix.service }}-${{ github.sha }}
+          key: ${{ runner.os }}-buildx-${{ matrix.service.name }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-buildx-${{ matrix.service }}-
+            ${{ runner.os }}-buildx-${{ matrix.service.name }}-
 
       - name: Install Hadolint
         run: |
           sudo wget -O /usr/local/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64
           sudo chmod +x /usr/local/bin/hadolint
       - name: Lint Dockerfile
-        run: hadolint ${{ matrix.service }}/Dockerfile
+        run: hadolint ${{ matrix.service.path }}/Dockerfile
 
       - name: Build Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./${{ matrix.service }}
-          file: ./${{ matrix.service }}/Dockerfile
+          context: ./${{ matrix.service.path }}
+          file: ./${{ matrix.service.path }}/Dockerfile
           push: false # Do not push image to a registry
-          tags: echotrail/${{ matrix.service }}:latest
+          tags: echotrail/${{ matrix.service.name }}:latest
           load: true # Load image into docker for scanning
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
@@ -144,7 +164,7 @@ jobs:
       - name: Scan image with Trivy
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'echotrail/${{ matrix.service }}:latest'
+          image-ref: 'echotrail/${{ matrix.service.name }}:latest'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
