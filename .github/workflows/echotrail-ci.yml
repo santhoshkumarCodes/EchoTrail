@@ -66,6 +66,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          # SonarCloud needs a full clone to correctly analyze history and assign issues.
+          fetch-depth: 0
 
       - name: Set up JDK ${{ matrix.java }}
         uses: actions/setup-java@v4
@@ -74,28 +77,20 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      # The 'verify' phase runs tests, integration tests (including Testcontainers),
-      # and code coverage (JaCoCo) if configured in the pom.xml
       - name: Build and test with Maven
         run: mvn -B verify --file ${{ matrix.service }}/pom.xml
 
-      # SonarCloud Scan runs only on the latest Java version to avoid duplicate reports
       - name: SonarCloud Scan
-        if: success() && matrix.java == '21'
-        uses: SonarSource/sonarcloud-github-action@master
+        if: matrix.java == '21' # Run scan only on the latest Java version
+        run: >
+          mvn -B sonar:sonar
+          --file ${{ matrix.service }}/pom.xml
+          -Dsonar.projectKey=echotrail_${{ matrix.service }}
+          -Dsonar.organization=santhoshkumarcodes
+          -Dsonar.host.url=https://sonarcloud.io
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          # Specifies the base directory for SonarCloud analysis for each microservice
-          args: >
-            -Dsonar.projectKey=echotrail_${{ matrix.service }}
-            -Dsonar.organization=your-sonarcloud-organization
-            -Dsonar.sources=./src/main/
-            -Dsonar.tests=./src/test/
-            -Dsonar.java.binaries=./target/classes
-            -Dsonar.coverage.jacoco.xmlReportPaths=./target/site/jacoco/jacoco.xml
-          projectBaseDir: ${{ matrix.service }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to decorate PRs with analysis results
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # Token for authentication with SonarCloud
 
   # Docker Job: Lints Dockerfiles, builds images, and scans for vulnerabilities
   docker:
