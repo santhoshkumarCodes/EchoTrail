@@ -28,6 +28,7 @@
     </scm>
     <properties>
         <java.version>21</java.version>
+        <sonar.organization>santhoshkumarcodes</sonar.organization>
         <spring-cloud.version>2025.0.0</spring-cloud.version>
         <commonmark.version>0.21.0</commonmark.version>
     </properties>

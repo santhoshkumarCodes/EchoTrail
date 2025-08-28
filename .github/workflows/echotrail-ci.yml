@@ -85,8 +85,8 @@ jobs:
         run: >
           mvn -B sonar:sonar
           --file ${{ matrix.service }}/pom.xml
-          -Dsonar.projectKey=echotrail_${{ matrix.service }}
-          -Dsonar.organization=santhoshkumarcodes
+          -Dsonar.projectKey=santhoshkumarCodes_EchoTrail
+          -Dsonar.projectName=${{ matrix.service }}
           -Dsonar.host.url=https://sonarcloud.io
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to decorate PRs with analysis results
