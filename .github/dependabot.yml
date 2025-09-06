@@ -1,0 +1,52 @@
+version: 2
+updates:
+  # Enable version updates for Maven for all microservices
+  - package-ecosystem: "maven"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "java"
+      - "dependencies"
+    # Group Spring Boot, Spring Cloud and other updates into separate pull requests
+    groups:
+      spring-boot:
+        patterns:
+          - "org.springframework.boot:*"
+      spring-cloud:
+        patterns:
+          - "org.springframework.cloud:*"
+      maven-other:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "org.springframework.boot:*"
+          - "org.springframework.cloud:*"
+
+  # Enable version updates for Dockerfiles in all subdirectories
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "docker"
+      - "dependencies"
+    # Group all Dockerfile updates into a single pull request
+    groups:
+      docker:
+        patterns:
+          - "*"
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "github-actions"
+      - "dependencies"
+    # Group all GitHub Actions updates into a single pull request
+    groups:
+      github-actions:
+        patterns:
+          - "*"
