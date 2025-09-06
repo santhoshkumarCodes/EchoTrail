@@ -30,6 +30,9 @@
         <java.version>21</java.version>
         <sonar.organization>santhoshkumarcodes</sonar.organization>
         <spring-cloud.version>2025.0.0</spring-cloud.version>
+        <xstream.version>1.4.21</xstream.version>
+        <commons-fileupload.version>1.6.0</commons-fileupload.version>
+        <tomcat.version>10.1.44</tomcat.version>
     </properties>
     <dependencies>
         <dependency>
@@ -85,6 +88,16 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.thoughtworks.xstream</groupId>
+                <artifactId>xstream</artifactId>
+                <version>${xstream.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons-fileupload.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
