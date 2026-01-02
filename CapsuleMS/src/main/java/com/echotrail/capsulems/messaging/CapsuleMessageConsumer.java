@@ -1,8 +1,5 @@
 package com.echotrail.capsulems.messaging;
 
-import com.echotrail.capsulems.messaging.dto.After;
-import com.echotrail.capsulems.messaging.dto.DebeziumMessage;
-import com.echotrail.capsulems.messaging.dto.DebeziumPayload;
 import com.echotrail.capsulems.messaging.dto.EventPayload;
 import com.echotrail.capsulems.model.CapsuleChain;
 import com.echotrail.capsulems.repository.CapsuleChainRepository;
@@ -32,30 +29,25 @@ public class CapsuleMessageConsumer {
     private static final String NEXT_CAPSULE_ID_FIELD = "next_capsule_id";
     private static final String PREVIOUS_CAPSULE_ID_FIELD = "previous_capsule_id";
 
-    @RetryableTopic(
-            attempts = "3",
-            backoff = @Backoff(delay = 1000, multiplier = 2.0),
-            topicSuffixingStrategy = TopicSuffixingStrategy.SUFFIX_WITH_INDEX_VALUE)
-    @KafkaListener(topics = "capsule.public.outbox", groupId = "capsule-ms")
-    public void consume(String message) {
-        log.info("Received message: {}", message);
+    @RetryableTopic(attempts = "3", backoff = @Backoff(delay = 1000, multiplier = 2.0), topicSuffixingStrategy = TopicSuffixingStrategy.SUFFIX_WITH_INDEX_VALUE)
+    @KafkaListener(topics = "capsule.public.outbox", groupId = "${spring.kafka.consumer.group-id:capsule-ms}")
+    public void consume(org.apache.kafka.clients.consumer.ConsumerRecord<String, String> record) {
+        String eventType = null;
+        org.apache.kafka.common.header.Header eventTypeHeader = record.headers().lastHeader("event_type");
+        if (eventTypeHeader != null) {
+            eventType = new String(eventTypeHeader.value());
+        }
+
+        String message = record.value();
         try {
-            DebeziumMessage debeziumMessage = objectMapper.readValue(message, DebeziumMessage.class);
-            DebeziumPayload payload = debeziumMessage.getPayload();
-
-            if (payload == null || payload.getAfter() == null) {
-                log.warn("Payload or after node is missing or null, skipping message");
-                return;
+            String messagePayload = record.value();
+            // Handle double encoding: if payload starts with quote, it is a JSON string
+            // containing the JSON
+            if (messagePayload != null && messagePayload.startsWith("\"")) {
+                messagePayload = objectMapper.readValue(messagePayload, String.class);
             }
 
-            After after = payload.getAfter();
-            String eventType = after.getEventType();
-            EventPayload eventPayload = after.getPayload();
-
-            if (eventPayload == null) {
-                log.warn("Event payload is missing or null, skipping message");
-                return;
-            }
+            EventPayload eventPayload = objectMapper.readValue(messagePayload, EventPayload.class);
 
             if ("CapsuleCreated".equals(eventType)) {
                 if (eventPayload.isChained()) {

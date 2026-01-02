@@ -25,9 +25,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {CapsuleMessageConsumerTest.TestConfig.class, CapsuleMessageConsumer.class})
+@ContextConfiguration(classes = { CapsuleMessageConsumerTest.TestConfig.class, CapsuleMessageConsumer.class })
 @DirtiesContext
-@EmbeddedKafka(partitions = 1, brokerProperties = { "listeners=PLAINTEXT://localhost:9092", "port=9092" }, topics = {"capsule.public.outbox"})
+@EmbeddedKafka(partitions = 1, brokerProperties = { "listeners=PLAINTEXT://localhost:9092", "port=9092" }, topics = {
+        "capsule.public.outbox" })
 class CapsuleMessageConsumerTest {
 
     @Configuration
@@ -72,22 +73,16 @@ class CapsuleMessageConsumerTest {
         capsulePayload.put("userId", 1L);
         capsulePayload.put("chained", true);
 
-        ObjectNode afterNode = objectMapper.createObjectNode();
-        afterNode.put("event_type", "CapsuleCreated");
-        afterNode.set("payload", capsulePayload);
+        String message = objectMapper.writeValueAsString(capsulePayload);
 
-        ObjectNode payloadNode = objectMapper.createObjectNode();
-        payloadNode.set("after", afterNode);
-
-        ObjectNode rootNode = objectMapper.createObjectNode();
-        rootNode.set("payload", payloadNode);
-
-        String message = objectMapper.writeValueAsString(rootNode);
+        org.apache.kafka.clients.consumer.ConsumerRecord<String, String> record = new org.apache.kafka.clients.consumer.ConsumerRecord<>(
+                "capsule.public.outbox", 0, 0L, "key", message);
+        record.headers().add("event_type", "CapsuleCreated".getBytes());
 
         when(capsuleChainRepository.findById(1L)).thenReturn(Optional.empty());
 
         // When
-        capsuleMessageConsumer.consume(message);
+        capsuleMessageConsumer.consume(record);
 
         // Then
         verify(capsuleChainRepository, timeout(5000).times(1)).save(any(CapsuleChain.class));
@@ -100,24 +95,18 @@ class CapsuleMessageConsumerTest {
         deletePayload.put("id", 1L);
         deletePayload.put("chained", true);
 
-        ObjectNode afterNode = objectMapper.createObjectNode();
-        afterNode.put("event_type", "CapsuleDeleted");
-        afterNode.set("payload", deletePayload);
+        String message = objectMapper.writeValueAsString(deletePayload);
 
-        ObjectNode payloadNode = objectMapper.createObjectNode();
-        payloadNode.set("after", afterNode);
-
-        ObjectNode rootNode = objectMapper.createObjectNode();
-        rootNode.set("payload", payloadNode);
-
-        String message = objectMapper.writeValueAsString(rootNode);
+        org.apache.kafka.clients.consumer.ConsumerRecord<String, String> record = new org.apache.kafka.clients.consumer.ConsumerRecord<>(
+                "capsule.public.outbox", 0, 0L, "key", message);
+        record.headers().add("event_type", "CapsuleDeleted".getBytes());
 
         CapsuleChain chain = new CapsuleChain(1L, null, null, 1L);
         when(capsuleChainRepository.findById(1L)).thenReturn(Optional.of(chain));
         when(cassandraTemplate.batchOps()).thenReturn(batchOperations);
 
         // When
-        capsuleMessageConsumer.consume(message);
+        capsuleMessageConsumer.consume(record);
 
         // Then
         verify(batchOperations, timeout(5000).times(1)).execute();

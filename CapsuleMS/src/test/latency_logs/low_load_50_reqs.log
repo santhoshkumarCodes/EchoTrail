@@ -1,0 +1,1723 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m----------------------< [0;36mcom.echotrail:CapsuleMS[0;1m >-----------------------[m
+[[1;34mINFO[m] [1mBuilding CapsuleMS 0.0.1-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36mCapsuleMS[0;1m ---[m
+[[1;34mINFO[m] Copying 1 resource from src/main/resources to target/classes
+[[1;34mINFO[m] Copying 0 resource from src/main/resources to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.13.0:compile[m [1m(default-compile)[m @ [36mCapsuleMS[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:testResources[m [1m(default-testResources)[m @ [36mCapsuleMS[0;1m ---[m
+[[1;34mINFO[m] Copying 1 resource from src/test/resources to target/test-classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.13.0:testCompile[m [1m(default-testCompile)[m @ [36mCapsuleMS[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:3.5.3:test[m [1m(default-test)[m @ [36mCapsuleMS[0;1m ---[m
+[[1;34mINFO[m] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[[1;34mINFO[m] 
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m]  T E S T S
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m] Running com.echotrail.capsulems.service.[1mCapsuleE2ELatencyTest[m
+22:50:11.427 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.echotrail.capsulems.service.CapsuleE2ELatencyTest]: CapsuleE2ELatencyTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:50:11.552 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.echotrail.capsulems.CapsuleMsApplication for test class com.echotrail.capsulems.service.CapsuleE2ELatencyTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.0)
+
+2026-01-02T22:50:12.156+05:30  INFO 114764 --- [           main] c.e.c.service.CapsuleE2ELatencyTest      : Starting CapsuleE2ELatencyTest using Java 21.0.9 with PID 114764 (started by santhoshkumar in /home/santhoshkumar/EchoTrail/CapsuleMS)
+2026-01-02T22:50:12.157+05:30  INFO 114764 --- [           main] c.e.c.service.CapsuleE2ELatencyTest      : No active profile set, falling back to 1 default profile: "default"
+2026-01-02T22:50:12.962+05:30  INFO 114764 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-01-02T22:50:12.965+05:30  INFO 114764 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Reactive Cassandra repositories in DEFAULT mode.
+2026-01-02T22:50:13.000+05:30  INFO 114764 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Reactive Cassandra - Could not safely identify store assignment for repository candidate interface com.echotrail.capsulems.outbox.OutboxEventRepository; If you want this repository to be a Reactive Cassandra repository, consider annotating your entities with one of these annotations: org.springframework.data.cassandra.core.mapping.Table (preferred), or consider extending one of the following types with your repository: org.springframework.data.cassandra.repository.ReactiveCassandraRepository
+2026-01-02T22:50:13.065+05:30  INFO 114764 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Reactive Cassandra - Could not safely identify store assignment for repository candidate interface com.echotrail.capsulems.repository.CapsuleRepository; If you want this repository to be a Reactive Cassandra repository, consider annotating your entities with one of these annotations: org.springframework.data.cassandra.core.mapping.Table (preferred), or consider extending one of the following types with your repository: org.springframework.data.cassandra.repository.ReactiveCassandraRepository
+2026-01-02T22:50:13.067+05:30  INFO 114764 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 93 ms. Found 0 Reactive Cassandra repository interfaces.
+2026-01-02T22:50:13.073+05:30  INFO 114764 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-01-02T22:50:13.074+05:30  INFO 114764 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Cassandra repositories in DEFAULT mode.
+2026-01-02T22:50:13.081+05:30  INFO 114764 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Cassandra - Could not safely identify store assignment for repository candidate interface com.echotrail.capsulems.outbox.OutboxEventRepository; If you want this repository to be a Cassandra repository, consider annotating your entities with one of these annotations: org.springframework.data.cassandra.core.mapping.Table (preferred), or consider extending one of the following types with your repository: org.springframework.data.cassandra.repository.CassandraRepository
+2026-01-02T22:50:13.082+05:30  INFO 114764 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Cassandra - Could not safely identify store assignment for repository candidate interface com.echotrail.capsulems.repository.CapsuleRepository; If you want this repository to be a Cassandra repository, consider annotating your entities with one of these annotations: org.springframework.data.cassandra.core.mapping.Table (preferred), or consider extending one of the following types with your repository: org.springframework.data.cassandra.repository.CassandraRepository
+2026-01-02T22:50:13.101+05:30  INFO 114764 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 2 Cassandra repository interfaces.
+2026-01-02T22:50:13.110+05:30  INFO 114764 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2026-01-02T22:50:13.111+05:30  INFO 114764 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-02T22:50:13.121+05:30  INFO 114764 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.echotrail.capsulems.repository.CapsuleChainRepository; If you want this repository to be a JPA repository, consider annotating your entities with one of these annotations: jakarta.persistence.Entity, jakarta.persistence.MappedSuperclass (preferred), or consider extending one of the following types with your repository: org.springframework.data.jpa.repository.JpaRepository
+2026-01-02T22:50:13.122+05:30  INFO 114764 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data JPA - Could not safely identify store assignment for repository candidate interface com.echotrail.capsulems.repository.CapsuleVisibilityRepository; If you want this repository to be a JPA repository, consider annotating your entities with one of these annotations: jakarta.persistence.Entity, jakarta.persistence.MappedSuperclass (preferred), or consider extending one of the following types with your repository: org.springframework.data.jpa.repository.JpaRepository
+2026-01-02T22:50:13.127+05:30  INFO 114764 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 2 JPA repository interfaces.
+2026-01-02T22:50:13.449+05:30  INFO 114764 --- [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=7602edbb-79ff-3a7b-a58a-231724ff1f02
+2026-01-02T22:50:13.931+05:30  INFO 114764 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-01-02T22:50:13.974+05:30  INFO 114764 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.15.Final
+2026-01-02T22:50:13.998+05:30  INFO 114764 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-01-02T22:50:14.187+05:30  INFO 114764 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-02T22:50:14.210+05:30  INFO 114764 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-01-02T22:50:14.377+05:30  INFO 114764 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@543ac221
+2026-01-02T22:50:14.378+05:30  INFO 114764 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-01-02T22:50:14.404+05:30  WARN 114764 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-01-02T22:50:14.421+05:30  INFO 114764 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 14.1
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-01-02T22:50:15.253+05:30  INFO 114764 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-02T22:50:15.302+05:30  INFO 114764 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-02T22:50:15.342+05:30  INFO 114764 --- [           main] c.d.o.d.i.core.DefaultMavenCoordinates   : Apache Cassandra Java Driver (org.apache.cassandra:java-driver-core) version 4.19.0
+2026-01-02T22:50:15.470+05:30  WARN 114764 --- [           main] o.s.data.convert.CustomConversions       : Registering converter from interface java.util.List to class com.datastax.oss.driver.api.core.data.CqlVector as reading converter although it doesn't convert from a store-supported type; You might want to check your annotation setup at the converter implementation
+2026-01-02T22:50:15.485+05:30  WARN 114764 --- [           main] o.s.data.convert.CustomConversions       : Registering converter from interface java.util.List to class com.datastax.oss.driver.api.core.data.CqlVector as reading converter although it doesn't convert from a store-supported type; You might want to check your annotation setup at the converter implementation
+2026-01-02T22:50:15.571+05:30  WARN 114764 --- [           main] o.s.data.convert.CustomConversions       : Registering converter from interface java.util.List to class com.datastax.oss.driver.api.core.data.CqlVector as reading converter although it doesn't convert from a store-supported type; You might want to check your annotation setup at the converter implementation
+2026-01-02T22:50:15.885+05:30  INFO 114764 --- [           main] c.d.o.d.i.c.c.CqlPrepareAsyncProcessor   : Adding handler to invalidate cached prepared statements on type changes
+2026-01-02T22:50:16.094+05:30  INFO 114764 --- [     s0-admin-0] c.d.oss.driver.internal.core.time.Clock  : Using native clock for microsecond precision
+2026-01-02T22:50:16.569+05:30  INFO 114764 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-01-02T22:50:17.191+05:30  WARN 114764 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-02T22:50:17.596+05:30  INFO 114764 --- [           main] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestTemplate.
+2026-01-02T22:50:17.707+05:30  INFO 114764 --- [           main] o.a.k.clients.admin.AdminClientConfig    : AdminClientConfig values: 
+	auto.include.jmx.reporter = true
+	bootstrap.controllers = []
+	bootstrap.servers = [localhost:29092]
+	client.dns.lookup = use_all_dns_ips
+	client.id = 
+	connections.max.idle.ms = 300000
+	default.api.timeout.ms = 60000
+	enable.metrics.push = true
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+
+2026-01-02T22:50:17.820+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2026-01-02T22:50:17.820+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2026-01-02T22:50:17.820+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1767374417819
+2026-01-02T22:50:18.052+05:30  INFO 114764 --- [| adminclient-1] o.a.kafka.common.utils.AppInfoParser     : App info kafka.admin.client for adminclient-1 unregistered
+2026-01-02T22:50:18.055+05:30  INFO 114764 --- [| adminclient-1] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2026-01-02T22:50:18.056+05:30  INFO 114764 --- [| adminclient-1] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-01-02T22:50:18.056+05:30  INFO 114764 --- [| adminclient-1] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2026-01-02T22:50:18.086+05:30  INFO 114764 --- [           main] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:29092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-capsule-ms-test-dlt-1
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = capsule-ms-test-dlt
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2026-01-02T22:50:18.113+05:30  INFO 114764 --- [           main] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-01-02T22:50:18.151+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2026-01-02T22:50:18.151+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2026-01-02T22:50:18.151+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1767374418151
+2026-01-02T22:50:18.153+05:30  INFO 114764 --- [           main] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-dlt-1, groupId=capsule-ms-test-dlt] Subscribed to topic(s): capsule.public.outbox-dlt
+2026-01-02T22:50:18.158+05:30  INFO 114764 --- [           main] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:29092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-capsule-ms-test-dlt-2
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = capsule-ms-test-dlt
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2026-01-02T22:50:18.159+05:30  INFO 114764 --- [           main] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-01-02T22:50:18.164+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2026-01-02T22:50:18.164+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2026-01-02T22:50:18.164+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1767374418164
+2026-01-02T22:50:18.165+05:30  INFO 114764 --- [           main] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-dlt-2, groupId=capsule-ms-test-dlt] Subscribed to topic(s): capsule.public.outbox-dlt
+2026-01-02T22:50:18.166+05:30  INFO 114764 --- [           main] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:29092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-capsule-ms-test-dlt-3
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = capsule-ms-test-dlt
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2026-01-02T22:50:18.167+05:30  INFO 114764 --- [           main] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-01-02T22:50:18.172+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2026-01-02T22:50:18.173+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2026-01-02T22:50:18.173+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1767374418172
+2026-01-02T22:50:18.173+05:30  INFO 114764 --- [           main] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] Subscribed to topic(s): capsule.public.outbox-dlt
+2026-01-02T22:50:18.176+05:30  INFO 114764 --- [           main] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:29092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-capsule-ms-test-retry-1-4
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = capsule-ms-test-retry-1
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2026-01-02T22:50:18.177+05:30  INFO 114764 --- [           main] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-01-02T22:50:18.183+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2026-01-02T22:50:18.184+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2026-01-02T22:50:18.184+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1767374418183
+2026-01-02T22:50:18.184+05:30  INFO 114764 --- [           main] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-retry-1-4, groupId=capsule-ms-test-retry-1] Subscribed to topic(s): capsule.public.outbox-retry-1
+2026-01-02T22:50:18.186+05:30  INFO 114764 --- [           main] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:29092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-capsule-ms-test-retry-1-5
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = capsule-ms-test-retry-1
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2026-01-02T22:50:18.187+05:30  INFO 114764 --- [           main] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-01-02T22:50:18.191+05:30  INFO 114764 --- [ner#0-dlt-1-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-capsule-ms-test-dlt-2, groupId=capsule-ms-test-dlt] Cluster ID: xGE_F-wFQzSC2maMN0AWCg
+2026-01-02T22:50:18.191+05:30  INFO 114764 --- [ner#0-dlt-0-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-capsule-ms-test-dlt-1, groupId=capsule-ms-test-dlt] Cluster ID: xGE_F-wFQzSC2maMN0AWCg
+2026-01-02T22:50:18.191+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] Cluster ID: xGE_F-wFQzSC2maMN0AWCg
+2026-01-02T22:50:18.192+05:30  INFO 114764 --- [ner#0-dlt-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-1, groupId=capsule-ms-test-dlt] Discovered group coordinator localhost:29092 (id: 2147483646 rack: null)
+2026-01-02T22:50:18.192+05:30  INFO 114764 --- [ner#0-dlt-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-2, groupId=capsule-ms-test-dlt] Discovered group coordinator localhost:29092 (id: 2147483646 rack: null)
+2026-01-02T22:50:18.192+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] Discovered group coordinator localhost:29092 (id: 2147483646 rack: null)
+2026-01-02T22:50:18.192+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2026-01-02T22:50:18.192+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2026-01-02T22:50:18.192+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1767374418192
+2026-01-02T22:50:18.192+05:30  INFO 114764 --- [           main] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-retry-1-5, groupId=capsule-ms-test-retry-1] Subscribed to topic(s): capsule.public.outbox-retry-1
+2026-01-02T22:50:18.194+05:30  INFO 114764 --- [ner#0-dlt-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-2, groupId=capsule-ms-test-dlt] (Re-)joining group
+2026-01-02T22:50:18.194+05:30  INFO 114764 --- [ner#0-dlt-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-1, groupId=capsule-ms-test-dlt] (Re-)joining group
+2026-01-02T22:50:18.194+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] (Re-)joining group
+2026-01-02T22:50:18.195+05:30  INFO 114764 --- [           main] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:29092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-capsule-ms-test-retry-1-6
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = capsule-ms-test-retry-1
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2026-01-02T22:50:18.195+05:30  INFO 114764 --- [           main] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-01-02T22:50:18.198+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2026-01-02T22:50:18.199+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2026-01-02T22:50:18.199+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1767374418198
+2026-01-02T22:50:18.199+05:30  INFO 114764 --- [           main] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-retry-1-6, groupId=capsule-ms-test-retry-1] Subscribed to topic(s): capsule.public.outbox-retry-1
+2026-01-02T22:50:18.200+05:30  INFO 114764 --- [           main] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:29092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-capsule-ms-test-retry-0-7
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = capsule-ms-test-retry-0
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2026-01-02T22:50:18.201+05:30  INFO 114764 --- [           main] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-01-02T22:50:18.209+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2026-01-02T22:50:18.210+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2026-01-02T22:50:18.210+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1767374418209
+2026-01-02T22:50:18.210+05:30  INFO 114764 --- [           main] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-retry-0-7, groupId=capsule-ms-test-retry-0] Subscribed to topic(s): capsule.public.outbox-retry-0
+2026-01-02T22:50:18.211+05:30  INFO 114764 --- [0-retry-1-2-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-capsule-ms-test-retry-1-6, groupId=capsule-ms-test-retry-1] Cluster ID: xGE_F-wFQzSC2maMN0AWCg
+2026-01-02T22:50:18.211+05:30  INFO 114764 --- [0-retry-1-1-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-capsule-ms-test-retry-1-5, groupId=capsule-ms-test-retry-1] Cluster ID: xGE_F-wFQzSC2maMN0AWCg
+2026-01-02T22:50:18.211+05:30  INFO 114764 --- [0-retry-1-0-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-capsule-ms-test-retry-1-4, groupId=capsule-ms-test-retry-1] Cluster ID: xGE_F-wFQzSC2maMN0AWCg
+2026-01-02T22:50:18.211+05:30  INFO 114764 --- [0-retry-1-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-6, groupId=capsule-ms-test-retry-1] Discovered group coordinator localhost:29092 (id: 2147483646 rack: null)
+2026-01-02T22:50:18.211+05:30  INFO 114764 --- [0-retry-1-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-5, groupId=capsule-ms-test-retry-1] Discovered group coordinator localhost:29092 (id: 2147483646 rack: null)
+2026-01-02T22:50:18.211+05:30  INFO 114764 --- [0-retry-1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-4, groupId=capsule-ms-test-retry-1] Discovered group coordinator localhost:29092 (id: 2147483646 rack: null)
+2026-01-02T22:50:18.212+05:30  INFO 114764 --- [0-retry-1-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-5, groupId=capsule-ms-test-retry-1] (Re-)joining group
+2026-01-02T22:50:18.212+05:30  INFO 114764 --- [           main] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:29092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-capsule-ms-test-retry-0-8
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = capsule-ms-test-retry-0
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2026-01-02T22:50:18.212+05:30  INFO 114764 --- [0-retry-1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-4, groupId=capsule-ms-test-retry-1] (Re-)joining group
+2026-01-02T22:50:18.212+05:30  INFO 114764 --- [0-retry-1-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-6, groupId=capsule-ms-test-retry-1] (Re-)joining group
+2026-01-02T22:50:18.212+05:30  INFO 114764 --- [           main] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-01-02T22:50:18.215+05:30  INFO 114764 --- [ner#0-dlt-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-1, groupId=capsule-ms-test-dlt] Request joining group due to: need to re-join with the given member-id: consumer-capsule-ms-test-dlt-1-cc2e6fea-7f93-4180-8b68-772f87a07299
+2026-01-02T22:50:18.215+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] Request joining group due to: need to re-join with the given member-id: consumer-capsule-ms-test-dlt-3-0a5c414f-7e9e-4e5c-b8ff-79f504b2be37
+2026-01-02T22:50:18.215+05:30  INFO 114764 --- [ner#0-dlt-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-2, groupId=capsule-ms-test-dlt] Request joining group due to: need to re-join with the given member-id: consumer-capsule-ms-test-dlt-2-be6fc1eb-3acc-4cc7-a6e8-9afc5bd77e3d
+2026-01-02T22:50:18.215+05:30  INFO 114764 --- [ner#0-dlt-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-1, groupId=capsule-ms-test-dlt] (Re-)joining group
+2026-01-02T22:50:18.215+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2026-01-02T22:50:18.215+05:30  INFO 114764 --- [ner#0-dlt-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-2, groupId=capsule-ms-test-dlt] (Re-)joining group
+2026-01-02T22:50:18.215+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] (Re-)joining group
+2026-01-02T22:50:18.216+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2026-01-02T22:50:18.216+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1767374418215
+2026-01-02T22:50:18.216+05:30  INFO 114764 --- [           main] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-retry-0-8, groupId=capsule-ms-test-retry-0] Subscribed to topic(s): capsule.public.outbox-retry-0
+2026-01-02T22:50:18.218+05:30  INFO 114764 --- [           main] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:29092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-capsule-ms-test-retry-0-9
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = capsule-ms-test-retry-0
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2026-01-02T22:50:18.219+05:30  INFO 114764 --- [           main] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-01-02T22:50:18.219+05:30  INFO 114764 --- [0-retry-1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-4, groupId=capsule-ms-test-retry-1] Request joining group due to: need to re-join with the given member-id: consumer-capsule-ms-test-retry-1-4-5ab0c1d8-0067-4f57-847f-60f7eae7162a
+2026-01-02T22:50:18.219+05:30  INFO 114764 --- [0-retry-1-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-6, groupId=capsule-ms-test-retry-1] Request joining group due to: need to re-join with the given member-id: consumer-capsule-ms-test-retry-1-6-d0cc0227-c44b-497c-a3f8-fb8cde187db8
+2026-01-02T22:50:18.219+05:30  INFO 114764 --- [0-retry-1-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-5, groupId=capsule-ms-test-retry-1] Request joining group due to: need to re-join with the given member-id: consumer-capsule-ms-test-retry-1-5-0b7cef3b-ec38-450b-9f05-082476b31423
+2026-01-02T22:50:18.220+05:30  INFO 114764 --- [0-retry-1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-4, groupId=capsule-ms-test-retry-1] (Re-)joining group
+2026-01-02T22:50:18.220+05:30  INFO 114764 --- [0-retry-1-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-5, groupId=capsule-ms-test-retry-1] (Re-)joining group
+2026-01-02T22:50:18.220+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] Successfully joined group with generation Generation{generationId=52, memberId='consumer-capsule-ms-test-dlt-3-0a5c414f-7e9e-4e5c-b8ff-79f504b2be37', protocol='range'}
+2026-01-02T22:50:18.220+05:30  INFO 114764 --- [0-retry-1-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-6, groupId=capsule-ms-test-retry-1] (Re-)joining group
+2026-01-02T22:50:18.220+05:30  INFO 114764 --- [ner#0-dlt-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-1, groupId=capsule-ms-test-dlt] Successfully joined group with generation Generation{generationId=52, memberId='consumer-capsule-ms-test-dlt-1-cc2e6fea-7f93-4180-8b68-772f87a07299', protocol='range'}
+2026-01-02T22:50:18.222+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2026-01-02T22:50:18.222+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2026-01-02T22:50:18.222+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1767374418222
+2026-01-02T22:50:18.223+05:30  INFO 114764 --- [           main] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-retry-0-9, groupId=capsule-ms-test-retry-0] Subscribed to topic(s): capsule.public.outbox-retry-0
+2026-01-02T22:50:18.223+05:30  INFO 114764 --- [0-retry-1-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-5, groupId=capsule-ms-test-retry-1] Successfully joined group with generation Generation{generationId=55, memberId='consumer-capsule-ms-test-retry-1-5-0b7cef3b-ec38-450b-9f05-082476b31423', protocol='range'}
+2026-01-02T22:50:18.223+05:30  INFO 114764 --- [ner#0-dlt-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-1, groupId=capsule-ms-test-dlt] SyncGroup failed: The group began another rebalance. Need to re-join the group. Sent generation was Generation{generationId=52, memberId='consumer-capsule-ms-test-dlt-1-cc2e6fea-7f93-4180-8b68-772f87a07299', protocol='range'}
+2026-01-02T22:50:18.223+05:30  INFO 114764 --- [0-retry-1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-4, groupId=capsule-ms-test-retry-1] Successfully joined group with generation Generation{generationId=55, memberId='consumer-capsule-ms-test-retry-1-4-5ab0c1d8-0067-4f57-847f-60f7eae7162a', protocol='range'}
+2026-01-02T22:50:18.223+05:30  INFO 114764 --- [0-retry-1-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-6, groupId=capsule-ms-test-retry-1] Successfully joined group with generation Generation{generationId=55, memberId='consumer-capsule-ms-test-retry-1-6-d0cc0227-c44b-497c-a3f8-fb8cde187db8', protocol='range'}
+2026-01-02T22:50:18.224+05:30  INFO 114764 --- [ner#0-dlt-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-1, groupId=capsule-ms-test-dlt] Request joining group due to: rebalance failed due to 'The group is rebalancing, so a rejoin is needed.' (RebalanceInProgressException)
+2026-01-02T22:50:18.224+05:30  INFO 114764 --- [ner#0-dlt-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-1, groupId=capsule-ms-test-dlt] (Re-)joining group
+2026-01-02T22:50:18.225+05:30  INFO 114764 --- [           main] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:29092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-capsule-ms-test-10
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = capsule-ms-test
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2026-01-02T22:50:18.226+05:30  INFO 114764 --- [           main] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-01-02T22:50:18.228+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] Finished assignment for group at generation 52: {consumer-capsule-ms-test-dlt-1-cc2e6fea-7f93-4180-8b68-772f87a07299=Assignment(partitions=[capsule.public.outbox-dlt-0]), consumer-capsule-ms-test-dlt-3-0a5c414f-7e9e-4e5c-b8ff-79f504b2be37=Assignment(partitions=[])}
+2026-01-02T22:50:18.228+05:30  INFO 114764 --- [0-retry-1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-4, groupId=capsule-ms-test-retry-1] Finished assignment for group at generation 55: {consumer-capsule-ms-test-retry-1-4-5ab0c1d8-0067-4f57-847f-60f7eae7162a=Assignment(partitions=[capsule.public.outbox-retry-1-0]), consumer-capsule-ms-test-retry-1-5-0b7cef3b-ec38-450b-9f05-082476b31423=Assignment(partitions=[]), consumer-capsule-ms-test-retry-1-6-d0cc0227-c44b-497c-a3f8-fb8cde187db8=Assignment(partitions=[])}
+2026-01-02T22:50:18.229+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2026-01-02T22:50:18.230+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2026-01-02T22:50:18.230+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1767374418229
+2026-01-02T22:50:18.230+05:30  INFO 114764 --- [0-retry-0-2-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-capsule-ms-test-retry-0-9, groupId=capsule-ms-test-retry-0] Cluster ID: xGE_F-wFQzSC2maMN0AWCg
+2026-01-02T22:50:18.230+05:30  INFO 114764 --- [           main] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] Subscribed to topic(s): capsule.public.outbox
+2026-01-02T22:50:18.230+05:30  INFO 114764 --- [0-retry-0-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-9, groupId=capsule-ms-test-retry-0] Discovered group coordinator localhost:29092 (id: 2147483646 rack: null)
+2026-01-02T22:50:18.231+05:30  INFO 114764 --- [0-retry-0-0-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-capsule-ms-test-retry-0-7, groupId=capsule-ms-test-retry-0] Cluster ID: xGE_F-wFQzSC2maMN0AWCg
+2026-01-02T22:50:18.231+05:30  INFO 114764 --- [0-retry-0-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-9, groupId=capsule-ms-test-retry-0] (Re-)joining group
+2026-01-02T22:50:18.231+05:30  INFO 114764 --- [0-retry-0-1-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-capsule-ms-test-retry-0-8, groupId=capsule-ms-test-retry-0] Cluster ID: xGE_F-wFQzSC2maMN0AWCg
+2026-01-02T22:50:18.232+05:30  INFO 114764 --- [0-retry-0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-7, groupId=capsule-ms-test-retry-0] Discovered group coordinator localhost:29092 (id: 2147483646 rack: null)
+2026-01-02T22:50:18.232+05:30  INFO 114764 --- [           main] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:29092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-capsule-ms-test-11
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = capsule-ms-test
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2026-01-02T22:50:18.232+05:30  INFO 114764 --- [0-retry-0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-7, groupId=capsule-ms-test-retry-0] (Re-)joining group
+2026-01-02T22:50:18.232+05:30  INFO 114764 --- [0-retry-0-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-8, groupId=capsule-ms-test-retry-0] Discovered group coordinator localhost:29092 (id: 2147483646 rack: null)
+2026-01-02T22:50:18.233+05:30  INFO 114764 --- [           main] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-01-02T22:50:18.233+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] SyncGroup failed: The group began another rebalance. Need to re-join the group. Sent generation was Generation{generationId=52, memberId='consumer-capsule-ms-test-dlt-3-0a5c414f-7e9e-4e5c-b8ff-79f504b2be37', protocol='range'}
+2026-01-02T22:50:18.234+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] Request joining group due to: rebalance failed due to 'The group is rebalancing, so a rejoin is needed.' (RebalanceInProgressException)
+2026-01-02T22:50:18.234+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] (Re-)joining group
+2026-01-02T22:50:18.234+05:30  INFO 114764 --- [0-retry-0-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-8, groupId=capsule-ms-test-retry-0] (Re-)joining group
+2026-01-02T22:50:18.235+05:30  INFO 114764 --- [0-retry-1-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-5, groupId=capsule-ms-test-retry-1] Successfully synced group in generation Generation{generationId=55, memberId='consumer-capsule-ms-test-retry-1-5-0b7cef3b-ec38-450b-9f05-082476b31423', protocol='range'}
+2026-01-02T22:50:18.235+05:30  INFO 114764 --- [0-retry-1-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-6, groupId=capsule-ms-test-retry-1] Successfully synced group in generation Generation{generationId=55, memberId='consumer-capsule-ms-test-retry-1-6-d0cc0227-c44b-497c-a3f8-fb8cde187db8', protocol='range'}
+2026-01-02T22:50:18.235+05:30  INFO 114764 --- [0-retry-1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-4, groupId=capsule-ms-test-retry-1] Successfully synced group in generation Generation{generationId=55, memberId='consumer-capsule-ms-test-retry-1-4-5ab0c1d8-0067-4f57-847f-60f7eae7162a', protocol='range'}
+2026-01-02T22:50:18.235+05:30  INFO 114764 --- [0-retry-1-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-6, groupId=capsule-ms-test-retry-1] Notifying assignor about the new Assignment(partitions=[])
+2026-01-02T22:50:18.235+05:30  INFO 114764 --- [0-retry-1-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-5, groupId=capsule-ms-test-retry-1] Notifying assignor about the new Assignment(partitions=[])
+2026-01-02T22:50:18.235+05:30  INFO 114764 --- [0-retry-1-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-1-4, groupId=capsule-ms-test-retry-1] Notifying assignor about the new Assignment(partitions=[capsule.public.outbox-retry-1-0])
+2026-01-02T22:50:18.236+05:30  INFO 114764 --- [0-retry-1-1-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-capsule-ms-test-retry-1-5, groupId=capsule-ms-test-retry-1] Adding newly assigned partitions: 
+2026-01-02T22:50:18.237+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2026-01-02T22:50:18.237+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2026-01-02T22:50:18.237+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1767374418237
+2026-01-02T22:50:18.237+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] Successfully joined group with generation Generation{generationId=53, memberId='consumer-capsule-ms-test-dlt-3-0a5c414f-7e9e-4e5c-b8ff-79f504b2be37', protocol='range'}
+2026-01-02T22:50:18.237+05:30  INFO 114764 --- [           main] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-11, groupId=capsule-ms-test] Subscribed to topic(s): capsule.public.outbox
+2026-01-02T22:50:18.237+05:30  INFO 114764 --- [ner#0-dlt-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-1, groupId=capsule-ms-test-dlt] Successfully joined group with generation Generation{generationId=53, memberId='consumer-capsule-ms-test-dlt-1-cc2e6fea-7f93-4180-8b68-772f87a07299', protocol='range'}
+2026-01-02T22:50:18.237+05:30  INFO 114764 --- [ner#0-dlt-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-2, groupId=capsule-ms-test-dlt] Successfully joined group with generation Generation{generationId=53, memberId='consumer-capsule-ms-test-dlt-2-be6fc1eb-3acc-4cc7-a6e8-9afc5bd77e3d', protocol='range'}
+2026-01-02T22:50:18.237+05:30  INFO 114764 --- [0-retry-1-2-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-capsule-ms-test-retry-1-6, groupId=capsule-ms-test-retry-1] Adding newly assigned partitions: 
+2026-01-02T22:50:18.238+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] Finished assignment for group at generation 53: {consumer-capsule-ms-test-dlt-2-be6fc1eb-3acc-4cc7-a6e8-9afc5bd77e3d=Assignment(partitions=[]), consumer-capsule-ms-test-dlt-1-cc2e6fea-7f93-4180-8b68-772f87a07299=Assignment(partitions=[capsule.public.outbox-dlt-0]), consumer-capsule-ms-test-dlt-3-0a5c414f-7e9e-4e5c-b8ff-79f504b2be37=Assignment(partitions=[])}
+2026-01-02T22:50:18.239+05:30  INFO 114764 --- [0-retry-1-2-C-1] o.s.k.l.KafkaMessageListenerContainer    : capsule-ms-test-retry-1: partitions assigned: []
+2026-01-02T22:50:18.240+05:30  INFO 114764 --- [0-retry-1-1-C-1] o.s.k.l.KafkaMessageListenerContainer    : capsule-ms-test-retry-1: partitions assigned: []
+2026-01-02T22:50:18.240+05:30  INFO 114764 --- [           main] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = latest
+	bootstrap.servers = [localhost:29092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-capsule-ms-test-12
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = capsule-ms-test
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+2026-01-02T22:50:18.241+05:30  INFO 114764 --- [           main] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-01-02T22:50:18.241+05:30  INFO 114764 --- [0-retry-1-0-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-capsule-ms-test-retry-1-4, groupId=capsule-ms-test-retry-1] Adding newly assigned partitions: capsule.public.outbox-retry-1-0
+2026-01-02T22:50:18.242+05:30  INFO 114764 --- [0-retry-0-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-9, groupId=capsule-ms-test-retry-0] Request joining group due to: need to re-join with the given member-id: consumer-capsule-ms-test-retry-0-9-f3d7b46d-dd9f-46d8-ba78-de1c37cd0639
+2026-01-02T22:50:18.243+05:30  INFO 114764 --- [0-retry-0-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-9, groupId=capsule-ms-test-retry-0] (Re-)joining group
+2026-01-02T22:50:18.243+05:30  INFO 114764 --- [0-retry-0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-7, groupId=capsule-ms-test-retry-0] Request joining group due to: need to re-join with the given member-id: consumer-capsule-ms-test-retry-0-7-a65b9b89-6edd-4e6f-822f-3c07b550ca68
+2026-01-02T22:50:18.243+05:30  INFO 114764 --- [0-retry-0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-7, groupId=capsule-ms-test-retry-0] (Re-)joining group
+2026-01-02T22:50:18.245+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2026-01-02T22:50:18.245+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2026-01-02T22:50:18.245+05:30  INFO 114764 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1767374418245
+2026-01-02T22:50:18.245+05:30  INFO 114764 --- [           main] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-12, groupId=capsule-ms-test] Subscribed to topic(s): capsule.public.outbox
+2026-01-02T22:50:18.246+05:30  INFO 114764 --- [0-retry-0-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-8, groupId=capsule-ms-test-retry-0] Request joining group due to: need to re-join with the given member-id: consumer-capsule-ms-test-retry-0-8-500d699d-85e4-4855-accf-f73e81e8f2a2
+2026-01-02T22:50:18.246+05:30  INFO 114764 --- [ner#0-dlt-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-1, groupId=capsule-ms-test-dlt] Successfully synced group in generation Generation{generationId=53, memberId='consumer-capsule-ms-test-dlt-1-cc2e6fea-7f93-4180-8b68-772f87a07299', protocol='range'}
+2026-01-02T22:50:18.246+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] Successfully synced group in generation Generation{generationId=53, memberId='consumer-capsule-ms-test-dlt-3-0a5c414f-7e9e-4e5c-b8ff-79f504b2be37', protocol='range'}
+2026-01-02T22:50:18.246+05:30  INFO 114764 --- [ner#0-dlt-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-2, groupId=capsule-ms-test-dlt] Successfully synced group in generation Generation{generationId=53, memberId='consumer-capsule-ms-test-dlt-2-be6fc1eb-3acc-4cc7-a6e8-9afc5bd77e3d', protocol='range'}
+2026-01-02T22:50:18.247+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] Notifying assignor about the new Assignment(partitions=[])
+2026-01-02T22:50:18.247+05:30  INFO 114764 --- [ner#0-dlt-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-1, groupId=capsule-ms-test-dlt] Notifying assignor about the new Assignment(partitions=[capsule.public.outbox-dlt-0])
+2026-01-02T22:50:18.247+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-capsule-ms-test-dlt-3, groupId=capsule-ms-test-dlt] Adding newly assigned partitions: 
+2026-01-02T22:50:18.247+05:30  INFO 114764 --- [ner#0-dlt-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-dlt-2, groupId=capsule-ms-test-dlt] Notifying assignor about the new Assignment(partitions=[])
+2026-01-02T22:50:18.247+05:30  INFO 114764 --- [ner#0-dlt-1-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-capsule-ms-test-dlt-2, groupId=capsule-ms-test-dlt] Adding newly assigned partitions: 
+2026-01-02T22:50:18.247+05:30  INFO 114764 --- [ner#0-dlt-2-C-1] o.s.k.l.KafkaMessageListenerContainer    : capsule-ms-test-dlt: partitions assigned: []
+2026-01-02T22:50:18.247+05:30  INFO 114764 --- [ner#0-dlt-1-C-1] o.s.k.l.KafkaMessageListenerContainer    : capsule-ms-test-dlt: partitions assigned: []
+2026-01-02T22:50:18.247+05:30  INFO 114764 --- [ner#0-dlt-0-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-capsule-ms-test-dlt-1, groupId=capsule-ms-test-dlt] Adding newly assigned partitions: capsule.public.outbox-dlt-0
+2026-01-02T22:50:18.247+05:30  INFO 114764 --- [0-retry-0-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-8, groupId=capsule-ms-test-retry-0] (Re-)joining group
+2026-01-02T22:50:18.249+05:30  INFO 114764 --- [0-retry-0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-7, groupId=capsule-ms-test-retry-0] Successfully joined group with generation Generation{generationId=54, memberId='consumer-capsule-ms-test-retry-0-7-a65b9b89-6edd-4e6f-822f-3c07b550ca68', protocol='range'}
+2026-01-02T22:50:18.249+05:30  INFO 114764 --- [0-retry-0-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-9, groupId=capsule-ms-test-retry-0] Successfully joined group with generation Generation{generationId=54, memberId='consumer-capsule-ms-test-retry-0-9-f3d7b46d-dd9f-46d8-ba78-de1c37cd0639', protocol='range'}
+2026-01-02T22:50:18.250+05:30  INFO 114764 --- [0-retry-0-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-9, groupId=capsule-ms-test-retry-0] Finished assignment for group at generation 54: {consumer-capsule-ms-test-retry-0-7-a65b9b89-6edd-4e6f-822f-3c07b550ca68=Assignment(partitions=[capsule.public.outbox-retry-0-0]), consumer-capsule-ms-test-retry-0-9-f3d7b46d-dd9f-46d8-ba78-de1c37cd0639=Assignment(partitions=[])}
+2026-01-02T22:50:18.254+05:30  INFO 114764 --- [0-retry-0-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-9, groupId=capsule-ms-test-retry-0] Successfully synced group in generation Generation{generationId=54, memberId='consumer-capsule-ms-test-retry-0-9-f3d7b46d-dd9f-46d8-ba78-de1c37cd0639', protocol='range'}
+2026-01-02T22:50:18.254+05:30  INFO 114764 --- [0-retry-0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-7, groupId=capsule-ms-test-retry-0] Successfully synced group in generation Generation{generationId=54, memberId='consumer-capsule-ms-test-retry-0-7-a65b9b89-6edd-4e6f-822f-3c07b550ca68', protocol='range'}
+2026-01-02T22:50:18.254+05:30  INFO 114764 --- [0-retry-0-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-9, groupId=capsule-ms-test-retry-0] Notifying assignor about the new Assignment(partitions=[])
+2026-01-02T22:50:18.255+05:30  INFO 114764 --- [0-retry-0-2-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-capsule-ms-test-retry-0-9, groupId=capsule-ms-test-retry-0] Adding newly assigned partitions: 
+2026-01-02T22:50:18.255+05:30  INFO 114764 --- [0-retry-0-2-C-1] o.s.k.l.KafkaMessageListenerContainer    : capsule-ms-test-retry-0: partitions assigned: []
+2026-01-02T22:50:18.255+05:30  INFO 114764 --- [0-retry-1-0-C-1] o.a.k.c.c.internals.ConsumerUtils        : Setting offset for partition capsule.public.outbox-retry-1-0 to the committed offset FetchPosition{offset=3388, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[localhost:29092 (id: 1 rack: null)], epoch=0}}
+2026-01-02T22:50:18.255+05:30  INFO 114764 --- [ner#0-dlt-0-C-1] o.a.k.c.c.internals.ConsumerUtils        : Setting offset for partition capsule.public.outbox-dlt-0 to the committed offset FetchPosition{offset=3386, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[localhost:29092 (id: 1 rack: null)], epoch=0}}
+2026-01-02T22:50:18.255+05:30  INFO 114764 --- [0-retry-0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-retry-0-7, groupId=capsule-ms-test-retry-0] Notifying assignor about the new Assignment(partitions=[capsule.public.outbox-retry-0-0])
+2026-01-02T22:50:18.255+05:30  INFO 114764 --- [0-retry-0-0-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-capsule-ms-test-retry-0-7, groupId=capsule-ms-test-retry-0] Adding newly assigned partitions: capsule.public.outbox-retry-0-0
+2026-01-02T22:50:18.256+05:30  INFO 114764 --- [ner#0-dlt-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : capsule-ms-test-dlt: partitions assigned: [capsule.public.outbox-dlt-0]
+2026-01-02T22:50:18.256+05:30  INFO 114764 --- [0-retry-1-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : capsule-ms-test-retry-1: partitions assigned: [capsule.public.outbox-retry-1-0]
+2026-01-02T22:50:18.259+05:30  INFO 114764 --- [           main] c.e.c.service.CapsuleE2ELatencyTest      : Started CapsuleE2ELatencyTest in 6.402 seconds (process running for 7.391)
+2026-01-02T22:50:18.261+05:30  INFO 114764 --- [ntainer#0-0-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] Cluster ID: xGE_F-wFQzSC2maMN0AWCg
+2026-01-02T22:50:18.259+05:30  INFO 114764 --- [ntainer#0-2-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-capsule-ms-test-12, groupId=capsule-ms-test] Cluster ID: xGE_F-wFQzSC2maMN0AWCg
+2026-01-02T22:50:18.262+05:30  INFO 114764 --- [ntainer#0-1-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-capsule-ms-test-11, groupId=capsule-ms-test] Cluster ID: xGE_F-wFQzSC2maMN0AWCg
+2026-01-02T22:50:18.263+05:30  INFO 114764 --- [0-retry-0-0-C-1] o.a.k.c.c.internals.ConsumerUtils        : Setting offset for partition capsule.public.outbox-retry-0-0 to the committed offset FetchPosition{offset=3398, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[localhost:29092 (id: 1 rack: null)], epoch=0}}
+2026-01-02T22:50:18.263+05:30  INFO 114764 --- [ntainer#0-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-11, groupId=capsule-ms-test] Discovered group coordinator localhost:29092 (id: 2147483646 rack: null)
+2026-01-02T22:50:18.263+05:30  INFO 114764 --- [0-retry-0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : capsule-ms-test-retry-0: partitions assigned: [capsule.public.outbox-retry-0-0]
+2026-01-02T22:50:18.264+05:30  INFO 114764 --- [ntainer#0-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-12, groupId=capsule-ms-test] Discovered group coordinator localhost:29092 (id: 2147483646 rack: null)
+2026-01-02T22:50:18.264+05:30  INFO 114764 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] Discovered group coordinator localhost:29092 (id: 2147483646 rack: null)
+2026-01-02T22:50:18.265+05:30  INFO 114764 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] (Re-)joining group
+2026-01-02T22:50:18.265+05:30  INFO 114764 --- [ntainer#0-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-12, groupId=capsule-ms-test] (Re-)joining group
+2026-01-02T22:50:18.265+05:30  INFO 114764 --- [ntainer#0-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-11, groupId=capsule-ms-test] (Re-)joining group
+2026-01-02T22:50:18.274+05:30  INFO 114764 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] Request joining group due to: need to re-join with the given member-id: consumer-capsule-ms-test-10-8158807b-65e0-4d05-a148-4c26a70a7432
+2026-01-02T22:50:18.275+05:30  INFO 114764 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] (Re-)joining group
+2026-01-02T22:50:18.277+05:30  INFO 114764 --- [ntainer#0-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-12, groupId=capsule-ms-test] Request joining group due to: need to re-join with the given member-id: consumer-capsule-ms-test-12-8de6d903-7058-494e-8e46-3b18c99f7531
+2026-01-02T22:50:18.278+05:30  INFO 114764 --- [ntainer#0-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-12, groupId=capsule-ms-test] (Re-)joining group
+2026-01-02T22:50:18.281+05:30  INFO 114764 --- [ntainer#0-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-11, groupId=capsule-ms-test] Request joining group due to: need to re-join with the given member-id: consumer-capsule-ms-test-11-af78c51d-ca81-4cfb-8720-786a4139c84e
+2026-01-02T22:50:18.281+05:30  INFO 114764 --- [ntainer#0-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-11, groupId=capsule-ms-test] (Re-)joining group
+2026-01-02T22:50:18.281+05:30  INFO 114764 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] Successfully joined group with generation Generation{generationId=57, memberId='consumer-capsule-ms-test-10-8158807b-65e0-4d05-a148-4c26a70a7432', protocol='range'}
+2026-01-02T22:50:18.282+05:30  INFO 114764 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] Finished assignment for group at generation 57: {consumer-capsule-ms-test-10-8158807b-65e0-4d05-a148-4c26a70a7432=Assignment(partitions=[capsule.public.outbox-0])}
+2026-01-02T22:50:18.294+05:30  INFO 114764 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] SyncGroup failed: The group began another rebalance. Need to re-join the group. Sent generation was Generation{generationId=57, memberId='consumer-capsule-ms-test-10-8158807b-65e0-4d05-a148-4c26a70a7432', protocol='range'}
+2026-01-02T22:50:18.295+05:30  INFO 114764 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] Request joining group due to: rebalance failed due to 'The group is rebalancing, so a rejoin is needed.' (RebalanceInProgressException)
+2026-01-02T22:50:18.295+05:30  INFO 114764 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] (Re-)joining group
+2026-01-02T22:50:18.299+05:30  INFO 114764 --- [ntainer#0-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-11, groupId=capsule-ms-test] Successfully joined group with generation Generation{generationId=58, memberId='consumer-capsule-ms-test-11-af78c51d-ca81-4cfb-8720-786a4139c84e', protocol='range'}
+2026-01-02T22:50:18.300+05:30  INFO 114764 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] Successfully joined group with generation Generation{generationId=58, memberId='consumer-capsule-ms-test-10-8158807b-65e0-4d05-a148-4c26a70a7432', protocol='range'}
+2026-01-02T22:50:18.299+05:30  INFO 114764 --- [ntainer#0-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-12, groupId=capsule-ms-test] Successfully joined group with generation Generation{generationId=58, memberId='consumer-capsule-ms-test-12-8de6d903-7058-494e-8e46-3b18c99f7531', protocol='range'}
+2026-01-02T22:50:18.300+05:30  INFO 114764 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] Finished assignment for group at generation 58: {consumer-capsule-ms-test-10-8158807b-65e0-4d05-a148-4c26a70a7432=Assignment(partitions=[capsule.public.outbox-0]), consumer-capsule-ms-test-12-8de6d903-7058-494e-8e46-3b18c99f7531=Assignment(partitions=[]), consumer-capsule-ms-test-11-af78c51d-ca81-4cfb-8720-786a4139c84e=Assignment(partitions=[])}
+2026-01-02T22:50:18.304+05:30  INFO 114764 --- [ntainer#0-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-11, groupId=capsule-ms-test] Successfully synced group in generation Generation{generationId=58, memberId='consumer-capsule-ms-test-11-af78c51d-ca81-4cfb-8720-786a4139c84e', protocol='range'}
+2026-01-02T22:50:18.304+05:30  INFO 114764 --- [ntainer#0-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-12, groupId=capsule-ms-test] Successfully synced group in generation Generation{generationId=58, memberId='consumer-capsule-ms-test-12-8de6d903-7058-494e-8e46-3b18c99f7531', protocol='range'}
+2026-01-02T22:50:18.304+05:30  INFO 114764 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] Successfully synced group in generation Generation{generationId=58, memberId='consumer-capsule-ms-test-10-8158807b-65e0-4d05-a148-4c26a70a7432', protocol='range'}
+2026-01-02T22:50:18.305+05:30  INFO 114764 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] Notifying assignor about the new Assignment(partitions=[capsule.public.outbox-0])
+2026-01-02T22:50:18.305+05:30  INFO 114764 --- [ntainer#0-2-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-12, groupId=capsule-ms-test] Notifying assignor about the new Assignment(partitions=[])
+2026-01-02T22:50:18.305+05:30  INFO 114764 --- [ntainer#0-0-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-capsule-ms-test-10, groupId=capsule-ms-test] Adding newly assigned partitions: capsule.public.outbox-0
+2026-01-02T22:50:18.305+05:30  INFO 114764 --- [ntainer#0-1-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-capsule-ms-test-11, groupId=capsule-ms-test] Notifying assignor about the new Assignment(partitions=[])
+2026-01-02T22:50:18.305+05:30  INFO 114764 --- [ntainer#0-2-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-capsule-ms-test-12, groupId=capsule-ms-test] Adding newly assigned partitions: 
+2026-01-02T22:50:18.306+05:30  INFO 114764 --- [ntainer#0-1-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-capsule-ms-test-11, groupId=capsule-ms-test] Adding newly assigned partitions: 
+2026-01-02T22:50:18.306+05:30  INFO 114764 --- [ntainer#0-2-C-1] o.s.k.l.KafkaMessageListenerContainer    : capsule-ms-test: partitions assigned: []
+2026-01-02T22:50:18.306+05:30  INFO 114764 --- [ntainer#0-1-C-1] o.s.k.l.KafkaMessageListenerContainer    : capsule-ms-test: partitions assigned: []
+2026-01-02T22:50:18.310+05:30  INFO 114764 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerUtils        : Setting offset for partition capsule.public.outbox-0 to the committed offset FetchPosition{offset=3862, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[localhost:29092 (id: 1 rack: null)], epoch=0}}
+2026-01-02T22:50:18.311+05:30  INFO 114764 --- [ntainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : capsule-ms-test: partitions assigned: [capsule.public.outbox-0]
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+2026-01-02T22:50:18.339+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3386, \"title\": \"Load Test Capsule 94\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.910682166\", \"unlocked\": false, \"contentHtml\": \"<p>Content 94</p>\\n\"}"
+2026-01-02T22:50:18.341+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3389, \"title\": \"Load Test Capsule 101\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.910682152\", \"unlocked\": false, \"contentHtml\": \"<p>Content 101</p>\\n\"}"
+2026-01-02T22:50:18.341+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3388, \"title\": \"Load Test Capsule 83\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.902468184\", \"unlocked\": false, \"contentHtml\": \"<p>Content 83</p>\\n\"}"
+2026-01-02T22:50:18.342+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3393, \"title\": \"Load Test Capsule 61\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.919731265\", \"unlocked\": false, \"contentHtml\": \"<p>Content 61</p>\\n\"}"
+2026-01-02T22:50:18.342+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3392, \"title\": \"Load Test Capsule 97\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.914413658\", \"unlocked\": false, \"contentHtml\": \"<p>Content 97</p>\\n\"}"
+2026-01-02T22:50:18.342+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3390, \"title\": \"Load Test Capsule 105\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.909315843\", \"unlocked\": false, \"contentHtml\": \"<p>Content 105</p>\\n\"}"
+2026-01-02T22:50:18.342+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3391, \"title\": \"Load Test Capsule 88\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.919101806\", \"unlocked\": false, \"contentHtml\": \"<p>Content 88</p>\\n\"}"
+2026-01-02T22:50:18.342+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3394, \"title\": \"Load Test Capsule 84\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.919753586\", \"unlocked\": false, \"contentHtml\": \"<p>Content 84</p>\\n\"}"
+2026-01-02T22:50:18.342+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3396, \"title\": \"Load Test Capsule 111\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.920476342\", \"unlocked\": false, \"contentHtml\": \"<p>Content 111</p>\\n\"}"
+2026-01-02T22:50:18.342+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3395, \"title\": \"Load Test Capsule 80\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.921834744\", \"unlocked\": false, \"contentHtml\": \"<p>Content 80</p>\\n\"}"
+2026-01-02T22:50:18.343+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3397, \"title\": \"Load Test Capsule 52\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.921313789\", \"unlocked\": false, \"contentHtml\": \"<p>Content 52</p>\\n\"}"
+2026-01-02T22:50:18.343+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3399, \"title\": \"Load Test Capsule 95\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.923830867\", \"unlocked\": false, \"contentHtml\": \"<p>Content 95</p>\\n\"}"
+2026-01-02T22:50:18.343+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3398, \"title\": \"Load Test Capsule 102\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.92812542\", \"unlocked\": false, \"contentHtml\": \"<p>Content 102</p>\\n\"}"
+2026-01-02T22:50:18.343+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3401, \"title\": \"Load Test Capsule 98\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.932360199\", \"unlocked\": false, \"contentHtml\": \"<p>Content 98</p>\\n\"}"
+2026-01-02T22:50:18.343+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3400, \"title\": \"Load Test Capsule 75\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.924047284\", \"unlocked\": false, \"contentHtml\": \"<p>Content 75</p>\\n\"}"
+2026-01-02T22:50:18.343+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3402, \"title\": \"Load Test Capsule 89\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.933097687\", \"unlocked\": false, \"contentHtml\": \"<p>Content 89</p>\\n\"}"
+2026-01-02T22:50:18.343+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3403, \"title\": \"Load Test Capsule 85\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.935400548\", \"unlocked\": false, \"contentHtml\": \"<p>Content 85</p>\\n\"}"
+2026-01-02T22:50:18.343+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3404, \"title\": \"Load Test Capsule 99\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.942660023\", \"unlocked\": false, \"contentHtml\": \"<p>Content 99</p>\\n\"}"
+2026-01-02T22:50:18.344+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3405, \"title\": \"Load Test Capsule 76\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.942406508\", \"unlocked\": false, \"contentHtml\": \"<p>Content 76</p>\\n\"}"
+2026-01-02T22:50:18.344+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3406, \"title\": \"Load Test Capsule 86\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.94675625\", \"unlocked\": false, \"contentHtml\": \"<p>Content 86</p>\\n\"}"
+2026-01-02T22:50:18.344+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3407, \"title\": \"Load Test Capsule 77\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.952019264\", \"unlocked\": false, \"contentHtml\": \"<p>Content 77</p>\\n\"}"
+2026-01-02T22:50:18.344+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3408, \"title\": \"Latency Measurement Capsule (Moderate Load)\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:46:37.961323635\", \"unlocked\": false, \"contentHtml\": \"<p>Latency Test Capsule Content</p>\\n\"}"
+2026-01-02T22:50:18.344+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3411, \"title\": \"Load Test Capsule 40\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.457851448\", \"unlocked\": false, \"contentHtml\": \"<p>Content 40</p>\\n\"}"
+2026-01-02T22:50:18.344+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3409, \"title\": \"Load Test Capsule 65\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.456116938\", \"unlocked\": false, \"contentHtml\": \"<p>Content 65</p>\\n\"}"
+2026-01-02T22:50:18.344+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3413, \"title\": \"Load Test Capsule 90\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.456119679\", \"unlocked\": false, \"contentHtml\": \"<p>Content 90</p>\\n\"}"
+2026-01-02T22:50:18.344+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3418, \"title\": \"Load Test Capsule 32\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.456118954\", \"unlocked\": false, \"contentHtml\": \"<p>Content 32</p>\\n\"}"
+2026-01-02T22:50:18.344+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3414, \"title\": \"Load Test Capsule 71\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.457300646\", \"unlocked\": false, \"contentHtml\": \"<p>Content 71</p>\\n\"}"
+2026-01-02T22:50:18.345+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3416, \"title\": \"Load Test Capsule 51\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.456646296\", \"unlocked\": false, \"contentHtml\": \"<p>Content 51</p>\\n\"}"
+2026-01-02T22:50:18.345+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3410, \"title\": \"Load Test Capsule 44\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.457201631\", \"unlocked\": false, \"contentHtml\": \"<p>Content 44</p>\\n\"}"
+2026-01-02T22:50:18.345+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3412, \"title\": \"Load Test Capsule 53\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.456545409\", \"unlocked\": false, \"contentHtml\": \"<p>Content 53</p>\\n\"}"
+2026-01-02T22:50:18.345+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3415, \"title\": \"Load Test Capsule 15\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.456488137\", \"unlocked\": false, \"contentHtml\": \"<p>Content 15</p>\\n\"}"
+2026-01-02T22:50:18.345+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3417, \"title\": \"Load Test Capsule 60\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.456628563\", \"unlocked\": false, \"contentHtml\": \"<p>Content 60</p>\\n\"}"
+2026-01-02T22:50:18.345+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3425, \"title\": \"Load Test Capsule 72\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.615804774\", \"unlocked\": false, \"contentHtml\": \"<p>Content 72</p>\\n\"}"
+2026-01-02T22:50:18.345+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3427, \"title\": \"Load Test Capsule 54\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.616493793\", \"unlocked\": false, \"contentHtml\": \"<p>Content 54</p>\\n\"}"
+2026-01-02T22:50:18.346+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3426, \"title\": \"Load Test Capsule 16\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.616204983\", \"unlocked\": false, \"contentHtml\": \"<p>Content 16</p>\\n\"}"
+2026-01-02T22:50:18.346+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3422, \"title\": \"Load Test Capsule 63\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.45641644\", \"unlocked\": false, \"contentHtml\": \"<p>Content 63</p>\\n\"}"
+2026-01-02T22:50:18.346+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3420, \"title\": \"Load Test Capsule 57\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.456421549\", \"unlocked\": false, \"contentHtml\": \"<p>Content 57</p>\\n\"}"
+2026-01-02T22:50:18.346+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3424, \"title\": \"Load Test Capsule 91\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.617248268\", \"unlocked\": false, \"contentHtml\": \"<p>Content 91</p>\\n\"}"
+2026-01-02T22:50:18.346+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3423, \"title\": \"Load Test Capsule 45\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.616784875\", \"unlocked\": false, \"contentHtml\": \"<p>Content 45</p>\\n\"}"
+2026-01-02T22:50:18.346+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3421, \"title\": \"Load Test Capsule 33\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.61665695\", \"unlocked\": false, \"contentHtml\": \"<p>Content 33</p>\\n\"}"
+2026-01-02T22:50:18.346+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3428, \"title\": \"Load Test Capsule 66\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.617079116\", \"unlocked\": false, \"contentHtml\": \"<p>Content 66</p>\\n\"}"
+2026-01-02T22:50:18.347+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3419, \"title\": \"Load Test Capsule 41\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.61377697\", \"unlocked\": false, \"contentHtml\": \"<p>Content 41</p>\\n\"}"
+2026-01-02T22:50:18.347+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3429, \"title\": \"Load Test Capsule 92\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.634055036\", \"unlocked\": false, \"contentHtml\": \"<p>Content 92</p>\\n\"}"
+2026-01-02T22:50:18.347+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3430, \"title\": \"Load Test Capsule 67\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.635065359\", \"unlocked\": false, \"contentHtml\": \"<p>Content 67</p>\\n\"}"
+2026-01-02T22:50:18.347+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3434, \"title\": \"Load Test Capsule 55\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.633897911\", \"unlocked\": false, \"contentHtml\": \"<p>Content 55</p>\\n\"}"
+2026-01-02T22:50:18.347+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3437, \"title\": \"Load Test Capsule 31\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.634468146\", \"unlocked\": false, \"contentHtml\": \"<p>Content 31</p>\\n\"}"
+2026-01-02T22:50:18.347+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3432, \"title\": \"Load Test Capsule 17\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.6354732\", \"unlocked\": false, \"contentHtml\": \"<p>Content 17</p>\\n\"}"
+2026-01-02T22:50:18.347+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3435, \"title\": \"Load Test Capsule 64\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.633897959\", \"unlocked\": false, \"contentHtml\": \"<p>Content 64</p>\\n\"}"
+2026-01-02T22:50:18.347+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3433, \"title\": \"Load Test Capsule 73\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.63318252\", \"unlocked\": false, \"contentHtml\": \"<p>Content 73</p>\\n\"}"
+2026-01-02T22:50:18.347+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3436, \"title\": \"Load Test Capsule 61\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.618369588\", \"unlocked\": false, \"contentHtml\": \"<p>Content 61</p>\\n\"}"
+2026-01-02T22:50:18.347+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3431, \"title\": \"Load Test Capsule 52\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.616774836\", \"unlocked\": false, \"contentHtml\": \"<p>Content 52</p>\\n\"}"
+2026-01-02T22:50:18.347+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3438, \"title\": \"Load Test Capsule 42\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.638774518\", \"unlocked\": false, \"contentHtml\": \"<p>Content 42</p>\\n\"}"
+2026-01-02T22:50:18.347+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3439, \"title\": \"Load Test Capsule 88\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.646005668\", \"unlocked\": false, \"contentHtml\": \"<p>Content 88</p>\\n\"}"
+2026-01-02T22:50:18.348+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3440, \"title\": \"Load Test Capsule 62\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.647828834\", \"unlocked\": false, \"contentHtml\": \"<p>Content 62</p>\\n\"}"
+2026-01-02T22:50:18.348+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3442, \"title\": \"Load Test Capsule 28\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.647318029\", \"unlocked\": false, \"contentHtml\": \"<p>Content 28</p>\\n\"}"
+2026-01-02T22:50:18.348+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3441, \"title\": \"Load Test Capsule 13\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.647863524\", \"unlocked\": false, \"contentHtml\": \"<p>Content 13</p>\\n\"}"
+2026-01-02T22:50:18.348+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3443, \"title\": \"Load Test Capsule 58\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.636070633\", \"unlocked\": false, \"contentHtml\": \"<p>Content 58</p>\\n\"}"
+2026-01-02T22:50:18.348+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3444, \"title\": \"Load Test Capsule 50\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.649219462\", \"unlocked\": false, \"contentHtml\": \"<p>Content 50</p>\\n\"}"
+2026-01-02T22:50:18.348+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3445, \"title\": \"Load Test Capsule 43\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.637755833\", \"unlocked\": false, \"contentHtml\": \"<p>Content 43</p>\\n\"}"
+2026-01-02T22:50:18.348+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3447, \"title\": \"Load Test Capsule 59\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.649171867\", \"unlocked\": false, \"contentHtml\": \"<p>Content 59</p>\\n\"}"
+2026-01-02T22:50:18.348+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3448, \"title\": \"Load Test Capsule 35\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.648012973\", \"unlocked\": false, \"contentHtml\": \"<p>Content 35</p>\\n\"}"
+2026-01-02T22:50:18.348+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3446, \"title\": \"Load Test Capsule 56\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.648134019\", \"unlocked\": false, \"contentHtml\": \"<p>Content 56</p>\\n\"}"
+2026-01-02T22:50:18.349+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3449, \"title\": \"Load Test Capsule 38\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.649998785\", \"unlocked\": false, \"contentHtml\": \"<p>Content 38</p>\\n\"}"
+2026-01-02T22:50:18.349+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3455, \"title\": \"Load Test Capsule 26\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.661954527\", \"unlocked\": false, \"contentHtml\": \"<p>Content 26</p>\\n\"}"
+2026-01-02T22:50:18.349+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3450, \"title\": \"Load Test Capsule 29\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.662344745\", \"unlocked\": false, \"contentHtml\": \"<p>Content 29</p>\\n\"}"
+2026-01-02T22:50:18.349+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3451, \"title\": \"Load Test Capsule 74\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.650240636\", \"unlocked\": false, \"contentHtml\": \"<p>Content 74</p>\\n\"}"
+2026-01-02T22:50:18.349+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3452, \"title\": \"Load Test Capsule 34\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.662352404\", \"unlocked\": false, \"contentHtml\": \"<p>Content 34</p>\\n\"}"
+2026-01-02T22:50:18.349+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3453, \"title\": \"Load Test Capsule 82\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.662541829\", \"unlocked\": false, \"contentHtml\": \"<p>Content 82</p>\\n\"}"
+2026-01-02T22:50:18.349+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3456, \"title\": \"Load Test Capsule 25\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.662993769\", \"unlocked\": false, \"contentHtml\": \"<p>Content 25</p>\\n\"}"
+2026-01-02T22:50:18.349+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3454, \"title\": \"Load Test Capsule 89\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.660366201\", \"unlocked\": false, \"contentHtml\": \"<p>Content 89</p>\\n\"}"
+2026-01-02T22:50:18.349+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3457, \"title\": \"Load Test Capsule 48\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.662702337\", \"unlocked\": false, \"contentHtml\": \"<p>Content 48</p>\\n\"}"
+2026-01-02T22:50:18.349+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3458, \"title\": \"Load Test Capsule 37\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.66763216\", \"unlocked\": false, \"contentHtml\": \"<p>Content 37</p>\\n\"}"
+2026-01-02T22:50:18.349+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3460, \"title\": \"Load Test Capsule 96\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.675870516\", \"unlocked\": false, \"contentHtml\": \"<p>Content 96</p>\\n\"}"
+2026-01-02T22:50:18.349+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3463, \"title\": \"Load Test Capsule 30\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.675556729\", \"unlocked\": false, \"contentHtml\": \"<p>Content 30</p>\\n\"}"
+2026-01-02T22:50:18.349+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3459, \"title\": \"Load Test Capsule 36\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.664933415\", \"unlocked\": false, \"contentHtml\": \"<p>Content 36</p>\\n\"}"
+2026-01-02T22:50:18.350+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3461, \"title\": \"Load Test Capsule 39\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.673295844\", \"unlocked\": false, \"contentHtml\": \"<p>Content 39</p>\\n\"}"
+2026-01-02T22:50:18.350+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3462, \"title\": \"Load Test Capsule 27\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.675552511\", \"unlocked\": false, \"contentHtml\": \"<p>Content 27</p>\\n\"}"
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (/home/santhoshkumar/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.5/byte-buddy-agent-1.17.5.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+Starting [Low Load] with 50 concurrent requests...
+2026-01-02T22:50:18.686+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3466, \"title\": \"Load Test Capsule 69\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.675552524\", \"unlocked\": false, \"contentHtml\": \"<p>Content 69</p>\\n\"}"
+2026-01-02T22:50:18.868+05:30  INFO 114764 --- [0-retry-0-0-C-1] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-retry-0-7, groupId=capsule-ms-test-retry-0] Seeking to offset 3472 for partition capsule.public.outbox-retry-0-0
+2026-01-02T22:50:18.868+05:30  INFO 114764 --- [0-retry-0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : Record in retry and not yet recovered
+2026-01-02T22:50:18.881+05:30  INFO 114764 --- [0-retry-1-0-C-1] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-retry-1-4, groupId=capsule-ms-test-retry-1] Seeking to offset 3465 for partition capsule.public.outbox-retry-1-0
+2026-01-02T22:50:18.882+05:30  INFO 114764 --- [0-retry-1-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : Record in retry and not yet recovered
+2026-01-02T22:50:18.889+05:30 ERROR 114764 --- [ner#0-dlt-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Message moved to DLT: "{\"id\": 3465, \"title\": \"Load Test Capsule 87\", \"public\": false, \"userId\": 100, \"chained\": true, \"mediaUrl\": null, \"unlockAt\": \"2026-01-02T23:47:17.677700796\", \"unlocked\": false, \"contentHtml\": \"<p>Content 87</p>\\n\"}"
+2026-01-02T22:50:18.941+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3870
+2026-01-02T22:50:18.954+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3865
+Inserted Measurement Capsule ID: 3913
+2026-01-02T22:50:18.968+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3863
+2026-01-02T22:50:18.979+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3872
+2026-01-02T22:50:18.991+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3866
+2026-01-02T22:50:18.998+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3864
+2026-01-02T22:50:19.009+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3867
+2026-01-02T22:50:19.019+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3868
+2026-01-02T22:50:19.028+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3869
+2026-01-02T22:50:19.036+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3871
+2026-01-02T22:50:19.049+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3880
+2026-01-02T22:50:19.058+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3878
+2026-01-02T22:50:19.069+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3874
+2026-01-02T22:50:19.078+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3876
+2026-01-02T22:50:19.085+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3879
+2026-01-02T22:50:19.093+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3877
+2026-01-02T22:50:19.099+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3881
+2026-01-02T22:50:19.108+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3873
+2026-01-02T22:50:19.115+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3875
+2026-01-02T22:50:19.124+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3882
+2026-01-02T22:50:19.134+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3885
+2026-01-02T22:50:19.147+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3883
+2026-01-02T22:50:19.153+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3886
+2026-01-02T22:50:19.164+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3887
+2026-01-02T22:50:19.172+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3884
+2026-01-02T22:50:19.180+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3888
+2026-01-02T22:50:19.182+05:30  INFO 114764 --- [0-retry-1-0-C-1] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-retry-1-4, groupId=capsule-ms-test-retry-1] Seeking to offset 3466 for partition capsule.public.outbox-retry-1-0
+2026-01-02T22:50:19.182+05:30  INFO 114764 --- [0-retry-1-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : Record in retry and not yet recovered
+2026-01-02T22:50:19.188+05:30  INFO 114764 --- [0-retry-0-0-C-1] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-capsule-ms-test-retry-0-7, groupId=capsule-ms-test-retry-0] Seeking to offset 3473 for partition capsule.public.outbox-retry-0-0
+2026-01-02T22:50:19.188+05:30  INFO 114764 --- [0-retry-0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : Record in retry and not yet recovered
+2026-01-02T22:50:19.189+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3890
+2026-01-02T22:50:19.197+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3889
+2026-01-02T22:50:19.205+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3891
+2026-01-02T22:50:19.213+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3894
+2026-01-02T22:50:19.219+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3895
+2026-01-02T22:50:19.225+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3893
+2026-01-02T22:50:19.230+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3892
+2026-01-02T22:50:19.236+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3899
+2026-01-02T22:50:19.242+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3897
+2026-01-02T22:50:19.248+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3900
+2026-01-02T22:50:19.254+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3896
+2026-01-02T22:50:19.260+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3898
+2026-01-02T22:50:19.266+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3901
+2026-01-02T22:50:19.271+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3903
+2026-01-02T22:50:19.277+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3905
+2026-01-02T22:50:19.284+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3902
+2026-01-02T22:50:19.289+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3904
+2026-01-02T22:50:19.294+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3906
+2026-01-02T22:50:19.300+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3907
+2026-01-02T22:50:19.304+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3908
+2026-01-02T22:50:19.310+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3910
+2026-01-02T22:50:19.316+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3912
+2026-01-02T22:50:19.323+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3911
+2026-01-02T22:50:19.329+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3909
+2026-01-02T22:50:19.335+05:30  INFO 114764 --- [ntainer#0-0-C-1] c.e.c.messaging.CapsuleMessageConsumer   : Created capsule chain for capsule id: 3913
+[Low Load] Load: 50 | Sync Latency: 392ms
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.993 s -- in com.echotrail.capsulems.service.[1mCapsuleE2ELatencyTest[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] Results:
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1;32mTests run: 1, Failures: 0, Errors: 0, Skipped: 0[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  12.120 s
+[[1;34mINFO[m] Finished at: 2026-01-02T22:50:21+05:30
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
